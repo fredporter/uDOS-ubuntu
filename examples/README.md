@@ -1,3 +1,4 @@
 # Examples
 
-Starter bootstrap payloads for autoinstall and optional Proton profile values.
+Starter bootstrap payloads for autoinstall, first-run, and browser-workstation
+scaffolding.

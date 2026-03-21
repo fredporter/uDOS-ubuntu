@@ -2,7 +2,8 @@
 
 ## Purpose
 
-Canonical Ubuntu 22.04 LTS base image definition for uDOS v2 deployments.
+Canonical Ubuntu 22.04 LTS base image definition and browser-workstation host
+lane for uDOS v2 deployments.
 
 ## Ownership
 
@@ -10,6 +11,7 @@ Canonical Ubuntu 22.04 LTS base image definition for uDOS v2 deployments.
 - sonic-screwdriver install hook compatibility
 - Proton suite integration lane
 - uDOS boot and desktop identity assets
+- browser-workstation hosting and setup story
 
 ## Non-Goals
 
@@ -37,7 +39,7 @@ Keep image generation deterministic, scriptable, and portable for Sonic-driven d
 ## Family Relation
 
 uDOS-ubuntu is the base OS lane consumed by sonic-screwdriver and layered by
-uDOS-core, uDOS-shell, and family extensions.
+uDOS-core, uDOS-shell, uDOS-wizard, and family extensions.
 
 ## Activation
 
@@ -51,4 +53,10 @@ Run the current first-run demo story with:
 
 ```bash
 bash scripts/demo-first-run-setup.sh
+```
+
+Run the current browser-workstation parity demo with:
+
+```bash
+bash scripts/demo-browser-workstation.sh
 ```
