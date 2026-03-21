@@ -1,3 +1,13 @@
 # Sonic Hooks
 
-Hook scripts consumed by sonic-screwdriver during live/install/reHook scripts consumed by sonic-screwdriver during live/install/reHook scripts consumed by sonic-screwdriver during live/install/ hHook scripts consumed by sonic-screwdriver during live/install/reHook scripts consumed by sonic-screwdriver during live/install/reHook scripts consumed by sonic-screw-uHook scripts consumed by sonic-screwdriver during live/install/reHook scripts consumed by sonic-screwdriver during live/install/reHook scripts consumed by sonic-screxHook scripts consumed by sonic-screwdriver during live/install/reHook scripts consumed by sonic-screwdriver during live/install/reHook scripts consumed by soniS-Hook scripts consumed by sonic-screwdriver during live/install/reHook scripts consumed by sonic-screwdriver during live/install/reHook scriPRHook scripts consumed by sonic-screwdriver during live/install/reHook scripts consumed by sonic-screwdriver during live/install/payloads for autoinstall and optional Proton profile values.
+Hook scripts consumed by `sonic-screwdriver` during live boot, install, and
+first-run handoff.
+
+Current hook surfaces:
+
+- `preinstall.sh`
+- `postinstall.sh`
+- `live-env.sh`
+
+These hooks remain Ubuntu-owned image/install surfaces. Sonic invokes them but
+does not redefine their contents.

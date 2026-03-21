@@ -46,3 +46,9 @@ The v2 repo activation path is documented in docs/activation.md.
 Run the local validation entrypoint with:
 
 scripts/run-ubuntu-checks.sh
+
+Run the current first-run demo story with:
+
+```bash
+bash scripts/demo-first-run-setup.sh
+```

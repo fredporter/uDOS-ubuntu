@@ -33,9 +33,12 @@ require_file "$REPO_ROOT/sonic-hooks/postinstall.sh"
 require_file "$REPO_ROOT/sonic-hooks/live-env.sh"
 require_file "$REPO_ROOT/examples/autoinstall-example.yaml"
 require_file "$REPO_ROOT/examples/proton-profile.env"
+require_file "$REPO_ROOT/examples/thinui-c64-launch.json"
 require_file "$REPO_ROOT/examples/README.md"
 require_file "$REPO_ROOT/scripts/README.md"
+require_file "$REPO_ROOT/scripts/demo-first-run-setup.sh"
 require_file "$REPO_ROOT/tests/README.md"
+require_file "$REPO_ROOT/docs/first-run-story.md"
 
 python3 - <<'PY'
 from pathlib import Path
