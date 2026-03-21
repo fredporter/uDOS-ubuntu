@@ -1,0 +1,24 @@
+name: Binder-backed work item
+description: Track a binder-scoped change in the v2 repo family.
+title: "[binder] "
+labels: ["binder"]
+body:
+  - type: input
+    id: binder
+    attributes:
+      label: Binder ID
+      description: Use #binder/<repo-or-stream>-<objective>
+      placeholder: "#binder/ubuntu-base-image-lane"
+    validations:
+      required: true
+  - type: dropdown
+    id: repo
+    attributes:
+      label: Owning repo
+      options:
+        - uDOS-ubuntu
+        - uDOS-ventoy
+        - sonic-screwdriver
+        - uDOS        - uDOS        - uDOS        - uDOS        - uDOS        - uDOS    ex        - uDOS        - uDOS        - uDOS        - uDOS     e
+        - uDOS        - uDOS        - uDOS        - uDOS        - uDOS        - uDOS    ex        - uDOS        - uDOS        - uDOS        - uDOS     e
+red: true
