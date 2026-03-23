@@ -433,7 +433,7 @@ It will:
 	•	run on uDOS-ubuntu as a local-first browser UI and service stack
 	•	use Proton as the primary personal sync and convenience ecosystem
 	•	keep the vault-first, markdown-first, binder-native model unchanged
-	•	rely on uHOME-empire for any Google, HubSpot, CRM, or other external always-on provider syncing
+	•	rely on uDOS-empire for any Google, HubSpot, CRM, or other external always-on provider syncing
 	•	preserve the same canonical normalization, workflow, compile, publishing, scheduling, and projection principles defined for the Mac app
 
 This is not a Linux clone of the Mac app UI shell.
@@ -452,14 +452,14 @@ uDOS-ubuntu is:
 	•	a local ingestion, normalization, and compile station
 	•	a projection/control-plane environment for Proton-facing convenience surfaces
 	•	a local scheduling and bounded automation station
-	•	a canonical vault operator that can also receive structured updates from uHOME-empire
+	•	a canonical vault operator that can also receive structured updates from uDOS-empire
 
 It is not:
 	•	a packaged desktop app in the macOS sense
 	•	a full email client
 	•	a full office suite
 	•	a replacement for Proton services
-	•	a replacement for uHOME-empire
+	•	a replacement for uDOS-empire
 	•	a second hidden runtime diverging from core uDOS workflow semantics
 
 ⸻
@@ -509,13 +509,13 @@ Delegate all always-on external provider sync such as:
 	•	external background retries and webhook handling
 
 to:
-	•	uHOME-empire
+	•	uDOS-empire
 
 ⸻
 
 Final Position
 
-uDOS-ubuntu is the Ubuntu implementation of the OMD local binder workstation, delivered as a browser-based GUI environment on top of a local service/runtime stack, with Proton as the primary personal sync surface and uHOME-empire as the always-on external sync layer.
+uDOS-ubuntu is the Ubuntu implementation of the OMD local binder workstation, delivered as a browser-based GUI environment on top of a local service/runtime stack, with Proton as the primary personal sync surface and uDOS-empire as the always-on external sync layer.
 
 ⸻
 
@@ -641,11 +641,11 @@ This mirrors the Apple model, but with Proton instead of Apple.
 
 ⸻
 
-Relationship With uHOME-empire
+Relationship With uDOS-empire
 
 This remains unchanged in principle.
 
-uHOME-empire responsibilities
+uDOS-empire responsibilities
 	•	Google sync
 	•	HubSpot sync
 	•	CRM sync
@@ -695,7 +695,7 @@ Binders compile into canonical artifacts first, then render into downstream outp
 
 7. Do not rebuild what already exists
 
-Use Proton, GitHub Pages, Obsidian, browser tools, and uHOME-empire where they are already the better surface.
+Use Proton, GitHub Pages, Obsidian, browser tools, and uDOS-empire where they are already the better surface.
 
 ⸻
 
@@ -832,7 +832,7 @@ Accept input from:
 	•	watch folders
 	•	browser paste/import panel
 	•	manual user input
-	•	uHOME-empire-fed external structured updates
+	•	uDOS-empire-fed external structured updates
 
 Rule
 
@@ -851,7 +851,7 @@ Support lightweight capture from:
 	•	watch folders
 	•	local share/open-with style integrations where practical
 	•	Proton-originating user workflows where supported
-	•	uHOME-empire-fed updates
+	•	uDOS-empire-fed updates
 
 Notes capture role
 
@@ -963,7 +963,7 @@ Empire-managed targets
 	•	CRM
 	•	other providers
 
-These are handled by uHOME-empire, not by local uDOS-ubuntu ownership.
+These are handled by uDOS-empire, not by local uDOS-ubuntu ownership.
 
 Projection rule
 
@@ -997,7 +997,7 @@ Proton-facing convenience may exist where useful, but:
 	•	CRM sync
 	•	Google/HubSpot sync
 
-remain uHOME-empire responsibilities.
+remain uDOS-empire responsibilities.
 
 ⸻
 
@@ -1123,7 +1123,7 @@ Per-source settings:
 Empire
 
 Dedicated visibility for:
-	•	Google/HubSpot/CRM status as received from uHOME-empire
+	•	Google/HubSpot/CRM status as received from uDOS-empire
 	•	last sync status
 	•	mapped records
 	•	handoff configuration
@@ -1419,7 +1419,7 @@ This decision is successful when uDOS-ubuntu can:
 
 Final Product Statement
 
-uDOS-ubuntu is the Ubuntu/browser implementation of the local uDOS binder workstation. It captures from Proton-facing surfaces, files, browser/manual inputs, and structured updates from uHOME-empire; normalizes everything into canonical binder records; stores durable truth in the vault with fast local indexes; runs scheduling, compile, publishing, and bounded automation locally; and projects selected records outward to Proton-facing and publishing surfaces without surrendering canonical workflow truth.
+uDOS-ubuntu is the Ubuntu/browser implementation of the local uDOS binder workstation. It captures from Proton-facing surfaces, files, browser/manual inputs, and structured updates from uDOS-empire; normalizes everything into canonical binder records; stores durable truth in the vault with fast local indexes; runs scheduling, compile, publishing, and bounded automation locally; and projects selected records outward to Proton-facing and publishing surfaces without surrendering canonical workflow truth.
 
 ⸻
 
