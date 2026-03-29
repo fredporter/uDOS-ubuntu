@@ -13,3 +13,9 @@ and optional package/profile setup.
   - ThinUI first-run launch payload
 - `examples/browser-workstation-scaffold.json`
   - Round B browser-workstation scaffold manifest
+- `examples/google-mvp-host-profile.json`
+  - first Google MVP host/cache/fallback profile
+
+Supporting runtime note:
+
+- `docs/google-mvp-runtime-mode.md`

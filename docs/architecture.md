@@ -26,3 +26,22 @@ repo, not a distro fork.
 uDOS-ubuntu owns base OS composition, workstation hosting, and compatibility
 hooks. It does not own runtime contracts, provider control surfaces, or
 cross-repo semantic policy.
+
+## Google MVP Host Rule
+
+For the first Google MVP lane, Ubuntu's default posture is:
+
+- `always-on local mirror/cache host`
+
+That means Ubuntu owns:
+
+- local cache
+- artifact staging
+- degraded-mode recovery
+- operator-visible host behavior when remote services are offline
+
+Ubuntu does not own:
+
+- provider entry
+- remote-service supervision
+- canonical cloud semantics

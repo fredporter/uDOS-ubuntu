@@ -11,6 +11,7 @@ The current scaffold assumes these operator lanes exist across the family:
 - browser workstation home and panel navigation
 - Wizard browser operator surfaces for workflow, publishing, automation, and config
 - Shell quickstart and startup-health entrypoints
+- Ubuntu degraded-mode handling for optional Google-backed lanes
 
 ## Setup Story
 
@@ -40,6 +41,12 @@ bash scripts/demo-browser-workstation.sh
 /app/automation
 /app/publishing
 /app/config
+```
+
+5. If the Google MVP lane is enabled, review the Ubuntu runtime-mode note:
+
+```text
+docs/google-mvp-runtime-mode.md
 ```
 
 ## Workstation Home Expectations
@@ -73,3 +80,6 @@ Round B provides:
 
 Later rounds may deepen the workstation shell into a fuller browser operator
 product, but this round is specifically the public parity scaffold.
+
+For the Google MVP host lane, Ubuntu must still prefer local cache and degraded
+mode over treating the remote mirror as mandatory.
