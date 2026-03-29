@@ -1,13 +1,21 @@
-# `uDOS-ubuntu` Dev Workspace
+# Ubuntu Dev Workspace
 
-This repo owns its own development rounds under `@dev/`.
+`/@dev` is the public planning lane for `uDOS-ubuntu`.
 
-Use this workspace for:
+Use it for:
 
-- repo-specific requests in `@dev/requests/`
-- repo-specific submissions in `@dev/submissions/`
-- repo-specific notes in `@dev/notes/`
-- repo-specific round records in `@dev/rounds/`
+- forward-looking roadmap items
+- active repo-specific todos
+- bounded upgrade packs that have not landed in stable docs yet
 
-Family-wide planning, cross-repo routing, and release coordination stay in
-`uDOS-dev/@dev`.
+Keep these local-only and out of public git:
+
+- `@dev/inbox/`
+- `@dev/devlog.md`
+- `@dev/history/`
+- `@dev/archive/`
+- `@dev/summaries/`
+- `@dev/scratch/`
+
+Stable reference belongs in `/docs`. Beginner-friendly learning material belongs
+in `/wiki`.

@@ -4,3 +4,9 @@ __pycache__/
 .DS_Store
 build/output/
 out/
+@dev/devlog.md
+@dev/inbox/
+@dev/history/
+@dev/archive/
+@dev/summaries/
+@dev/scratch/
