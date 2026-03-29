@@ -1,12 +1,13 @@
 # Ubuntu Dev Workspace
 
-`/@dev` is the public planning lane for `uDOS-ubuntu`.
+`/@dev` is the compact public planning lane for `uDOS-ubuntu`.
 
 Use it for:
 
 - forward-looking roadmap items
 - active repo-specific todos
-- bounded upgrade packs that have not landed in stable docs yet
+- compact active indexes and summaries
+- bounded current spec packs that have not landed in stable docs yet
 
 Keep these local-only and out of public git:
 
@@ -19,3 +20,5 @@ Keep these local-only and out of public git:
 
 Stable reference belongs in `/docs`. Beginner-friendly learning material belongs
 in `/wiki`.
+
+Do not keep long public request and submission ledgers here.
