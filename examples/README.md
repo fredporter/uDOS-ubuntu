@@ -1,4 +1,4 @@
 # Examples
 
-Starter bootstrap payloads for autoinstall, first-run, and browser-workstation
+Starter bootstrap payloads for autoinstall, first-run, and command-centre
 scaffolding.

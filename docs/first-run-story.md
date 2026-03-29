@@ -7,7 +7,7 @@ This is the intended first-run setup story for the current `uDOS-ubuntu` lane.
 1. boot into the Ubuntu base image staged by Sonic
 2. apply `sonic-hooks/preinstall.sh`, `postinstall.sh`, and `live-env.sh`
 3. verify package baseline from `config/packages.list`
-4. open the browser-workstation home scaffold as the binder-native operator shell
+4. open the browser command-centre home scaffold as the operator shell
 5. hand off to `uDOS-shell` quickstart and startup health summary
 6. optionally launch the ThinUI C64 first-run panel
 
@@ -17,7 +17,7 @@ This is the intended first-run setup story for the current `uDOS-ubuntu` lane.
 bash scripts/demo-first-run-setup.sh
 ```
 
-Browser-workstation demo entry:
+Browser command-centre demo entry:
 
 ```bash
 bash scripts/demo-browser-workstation.sh
@@ -27,6 +27,6 @@ bash scripts/demo-browser-workstation.sh
 
 - `examples/thinui-c64-launch.json`
 
-## Browser Workstation Payload
+## Browser Command-Centre Payload
 
 - `examples/browser-workstation-scaffold.json`

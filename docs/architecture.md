@@ -1,7 +1,7 @@
 # uDOS-ubuntu Architecture
 
-uDOS-ubuntu is a reproducible image-definition and browser-workstation host
-repo, not a distro fork.
+uDOS-ubuntu is the reproducible Ubuntu image-definition and always-on runtime
+host repo for the family command centre. It is still not a distro fork.
 
 ## Main Areas
 
@@ -11,37 +11,50 @@ repo, not a distro fork.
 - theming/: uDOS visual identity assets and mode overlays
 - boot/: boot branding surfaces and sonic menu integration stubs
 - sonic-hooks/: preinstall, postinstall, and live environment hooks for sonic-screwdriver
-- examples/: first-run and browser-workstation scaffold payloads
+- examples/: first-run and command-centre scaffold payloads
+
+## Runtime Host Direction
+
+Ubuntu is the intended host for:
+
+- the base browser command centre
+- the base TUI shell and command loop
+- local/offline/online runtime networking
+- Beacon and Portal service hosting
+- master local vault storage and static vault publishing
+- sync queues and retry workers
+- scheduled operations and background jobs
+- data-to-markdown processing services
+- runtime-edge API budgeting enforcement
 
 ## Deployment Path
 
 1. image build is produced from deterministic scripts
 2. sonic-screwdriver stages and verifies image payloads
 3. sonic install mode applies optional injected configuration
-4. first-run bootstrap enables uDOS runtime layering
-5. browser workstation opens the binder-native local operator shell
+4. first-run bootstrap enables the always-on runtime layer
+5. browser command centre and TUI shell open as the operator entry surfaces
 
 ## Boundary Rule
 
-uDOS-ubuntu owns base OS composition, workstation hosting, and compatibility
-hooks. It does not own runtime contracts, provider control surfaces, or
-cross-repo semantic policy.
+uDOS-ubuntu owns base OS composition, command-centre hosting, and runtime host
+assembly. It does not own canonical runtime contracts, provider adapter logic,
+or cross-repo semantic policy.
 
-## Google MVP Host Rule
+`uDOS-core` remains the canonical contract owner.
+`uDOS-wizard` should contract toward publishing, provider bridges, assist, MCP,
+and remote adapters.
+`uHOME` should consume the runtime spine rather than redefine it.
 
-For the first Google MVP lane, Ubuntu's default posture is:
+## Failure Rule
 
-- `always-on local mirror/cache host`
+If Wizard is offline, Ubuntu-hosted local runtime surfaces must still support:
 
-That means Ubuntu owns:
+- local shell command execution
+- local browser command-centre access
+- local vault serving and browsing
+- local scheduling
+- local sync persistence and retry
 
-- local cache
-- artifact staging
-- degraded-mode recovery
-- operator-visible host behavior when remote services are offline
-
-Ubuntu does not own:
-
-- provider entry
-- remote-service supervision
-- canonical cloud semantics
+Remote publishing and provider-backed assist may degrade, but the base runtime
+must continue operating.

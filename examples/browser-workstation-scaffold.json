@@ -1,15 +1,15 @@
 {
-  "id": "ubuntu-browser-workstation",
+  "id": "ubuntu-browser-command-centre",
   "version": "v2.3-round-b",
   "entry_view": "workstation-home",
-  "mode": "browser-workstation",
+  "mode": "browser-command-centre",
   "binder_native": true,
   "parity_target": "mdc-mac-app",
   "views": [
     {
       "id": "workstation-home",
       "title": "Binder Workstation Home",
-      "purpose": "Open the browser workstation with binder summary, current workflow state, and review shortcuts."
+      "purpose": "Open the browser command centre with binder summary, current workflow state, and review shortcuts."
     },
     {
       "id": "workflow",
@@ -17,9 +17,9 @@
       "purpose": "Show active workflow, handoffs, current task, and progression state."
     },
     {
-      "id": "review-center",
-      "title": "Review Center",
-      "purpose": "Review contacts, notes, tasks, and message-derived records in a browser-first operator shell."
+      "id": "host-surface",
+      "title": "Host Surface",
+      "purpose": "Inspect host summary, local state, secrets, budget, providers, and orchestration status."
     },
     {
       "id": "publishing",
@@ -29,7 +29,7 @@
     {
       "id": "automation-status",
       "title": "Automation Status",
-      "purpose": "Expose queue, diagnostics, and background-work visibility without moving scheduler ownership into Ubuntu."
+      "purpose": "Expose queue, diagnostics, and background-work visibility for the core runtime host."
     },
     {
       "id": "diagnostics",

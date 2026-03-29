@@ -3,15 +3,16 @@
 ## Purpose
 
 Activate the first public base-image lane for the uDOS family with deterministic
-build surfaces, sonic-compatible install hooks, and a browser-workstation setup
-direction aligned to the public `mdc-mac-app` role.
+build surfaces, sonic-compatible install hooks, and an always-on command-centre
+setup direction.
 
 ## Activated Surfaces
 
 - reproducible build lane under build/
 - package and system defaults under config/
 - sonic pre/post install hooks under sonic-hooks/
-- browser-workstation scaffold under examples/ and docs/
+- command-centre scaffolding, service-boot planning, and config layout docs
+- legacy-named scaffold manifest under examples/
 - repo validation entrypoint under scripts/run-ubuntu-checks.sh
 
 ## Current Validation Contract

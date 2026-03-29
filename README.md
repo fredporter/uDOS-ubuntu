@@ -2,8 +2,8 @@
 
 ## Purpose
 
-Canonical Ubuntu 22.04 LTS base image definition and browser-workstation host
-lane for uDOS v2 deployments.
+Canonical Ubuntu 22.04 LTS base image definition and always-on command-centre
+host lane for uDOS deployments.
 
 ## Ownership
 
@@ -11,7 +11,11 @@ lane for uDOS v2 deployments.
 - sonic-screwdriver install hook compatibility
 - Proton suite integration lane
 - uDOS boot and desktop identity assets
-- browser-workstation hosting and setup story
+- browser command-centre hosting and setup story
+- always-on runtime host posture
+- local network, vault, sync, and scheduled-operation host posture
+- shared API, budgeting, security, and policy enforcement at the runtime edge
+- local and remote-aware AI or model hosting gateways for the family runtime
 
 ## Non-Goals
 
@@ -38,12 +42,31 @@ Keep image generation deterministic, scriptable, and portable for Sonic-driven d
 
 ## Family Relation
 
-uDOS-ubuntu is the base OS lane consumed by sonic-screwdriver and layered by
-uDOS-core, uDOS-shell, uDOS-wizard, and family extensions.
+uDOS-ubuntu is the target always-on runtime host for the family.
+
+It should host the official base command centre:
+
+- browser GUI
+- TUI shell
+- local and remote-aware networking services
+- API access and budget enforcement
+- security and shared policy gates
+- vault and sync services
+- scheduled operations
+
+It is installed and recovered through `sonic-screwdriver`, grounded in
+`uDOS-core` contracts, and should consume `uDOS-shell`, `uDOS-thinui`,
+`uDOS-themes`, and selected Wizard services without delegating base runtime
+uptime to Wizard.
 
 ## Activation
 
 The v2 repo activation path is documented in docs/activation.md.
+
+Runtime planning references:
+
+- `docs/systemd-unit-plan.md`
+- `docs/config-layout.md`
 
 Run the local validation entrypoint with:
 
@@ -55,7 +78,7 @@ Run the current first-run demo story with:
 bash scripts/demo-first-run-setup.sh
 ```
 
-Run the current browser-workstation parity demo with:
+Run the current browser command-centre parity demo with:
 
 ```bash
 bash scripts/demo-browser-workstation.sh

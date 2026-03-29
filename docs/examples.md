@@ -1,7 +1,7 @@
 # Examples
 
-The repo ships starter example payloads for first-run, workstation scaffolding,
-and optional package/profile setup.
+The repo ships starter example payloads for first-run, command-centre
+scaffolding, and optional package/profile setup.
 
 ## Available Examples
 
@@ -12,7 +12,7 @@ and optional package/profile setup.
 - `examples/thinui-c64-launch.json`
   - ThinUI first-run launch payload
 - `examples/browser-workstation-scaffold.json`
-  - Round B browser-workstation scaffold manifest
+  - legacy-named scaffold manifest now used as the command-centre starter example
 - `examples/google-mvp-host-profile.json`
   - first Google MVP host/cache/fallback profile
 

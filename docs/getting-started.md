@@ -14,16 +14,22 @@
 
 This validates required repository surfaces and template assets.
 
-## Browser Workstation Scaffold
+## Command-Centre Scaffold
 
-Inspect the Round B workstation scaffold with:
+Inspect the current scaffold manifest with:
 
 ```bash
 cat examples/browser-workstation-scaffold.json
 ```
 
-Emit the workstation demo story with:
+Emit the command-centre demo story with:
 
 ```bash
 bash scripts/demo-browser-workstation.sh
 ```
+
+Planning references:
+
+- `docs/systemd-unit-plan.md`
+- `docs/config-layout.md`
+- `docs/local-service-scaffold.md`
