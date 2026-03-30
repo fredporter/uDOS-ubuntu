@@ -88,6 +88,26 @@
       "execution": "async"
     },
     {
+      "operation_id": "repo.list",
+      "owner_service": "udos-gitd",
+      "execution": "sync"
+    },
+    {
+      "operation_id": "repo.status",
+      "owner_service": "udos-gitd",
+      "execution": "sync"
+    },
+    {
+      "operation_id": "repo.fetch",
+      "owner_service": "udos-gitd",
+      "execution": "async"
+    },
+    {
+      "operation_id": "repo.pull",
+      "owner_service": "udos-gitd",
+      "execution": "async"
+    },
+    {
       "operation_id": "jobs.schedule.list",
       "owner_service": "udos-scheduled",
       "execution": "sync"

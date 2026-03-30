@@ -23,6 +23,8 @@ Ubuntu is the intended host for:
 - Beacon and Portal service hosting
 - master local vault storage and static vault publishing
 - sync queues and retry workers
+- canonical local repo checkout and mirror storage
+- host-side Git and GitHub execution gates
 - scheduled operations and background jobs
 - data-to-markdown processing services
 - runtime-edge API budgeting enforcement
@@ -38,12 +40,19 @@ Ubuntu is the intended host for:
 ## Boundary Rule
 
 uDOS-ubuntu owns base OS composition, command-centre hosting, and runtime host
-assembly. It does not own canonical runtime contracts, provider adapter logic,
-or cross-repo semantic policy.
+assembly.
+
+It now also owns the coordinated local repo store plus host execution of Git
+and GitHub actions such as status, fetch, branch, pull, and push.
+
+It does not own canonical runtime contracts, cross-repo semantic policy, or
+Empire's WordPress plugin logic.
 
 `uDOS-core` remains the canonical contract owner.
 `uDOS-wizard` should contract toward publishing, provider bridges, assist, MCP,
-and remote adapters.
+and remote adapters, but not become the canonical repo-store owner.
+`uDOS-empire` should contract toward WordPress CRM, email, and admin workflows
+running on the host rather than host-owned Git or GitHub operations.
 `uHOME` should consume the runtime spine rather than redefine it.
 
 ## Failure Rule

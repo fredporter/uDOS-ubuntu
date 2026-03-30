@@ -9,6 +9,8 @@
 - local host, cache, and fallback behavior for optional remote lanes
 - command-centre host assembly and service boot plan
 - host-installed config layout for the always-on runtime
+- central local repo-store ownership
+- host-side Git and GitHub execution policy and service surfaces
 
 ## Does Not Own
 
@@ -16,4 +18,4 @@
 - shell interaction ownership (`uDOS-shell`)
 - provider adapter ownership (`uDOS-wizard`)
 - deployment orchestrator ownership (`sonic-screwdriver`)
-- remote Google service semantics (`uDOS-empire`)
+- WordPress plugin CRM or email ownership (`uDOS-empire`)

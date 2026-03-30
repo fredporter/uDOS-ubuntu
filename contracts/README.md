@@ -14,6 +14,7 @@ spec.
 - `udos-commandd/minimum-operations.v1.json`
 - `udos-commandd/okd-surface.v1.json`
 - `udos-commandd/wizard-host-surface.v1.json`
+- `udos-commandd/git-host-surface.v1.json`
 
 ## Rule
 

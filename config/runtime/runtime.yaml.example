@@ -5,6 +5,8 @@ paths:
   vault: "~/.udos/vault"
   publish: "~/.udos/publish"
   sync: "~/.udos/sync"
+  repos: "~/.udos/repos"
+  repo_registry: "~/.udos/state/gitd/repo-registry.tsv"
   logs: "~/.udos/logs"
   cache: "~/.udos/cache"
   tmp: "~/.udos/tmp"
@@ -18,3 +20,4 @@ ports:
   budgetd: 7106
   web: 7107
   wizard_adapter: 7108
+  gitd: 7109

@@ -20,6 +20,7 @@ Target layout:
 - `config/env/`
 - `config/network/`
 - `config/runtime/`
+- `config/policy/`
 - `config/web/`
 - `config/thinui/`
 - `config/tui/`
@@ -95,6 +96,18 @@ Expected contents:
 - state/log/cache path defaults
 - service port defaults
 - health/readiness config
+
+### `config/policy/`
+
+Purpose:
+
+- checked-in non-secret safety defaults for host-managed outbound operations
+
+Expected contents:
+
+- Git or GitHub approval defaults
+- audit posture defaults
+- action gating templates for push and remote mutations
 
 ### `config/web/`
 
@@ -216,6 +229,8 @@ The first concrete config files now exist as starter templates:
 - `config/env/udos-networkd.env.example`
 - `config/env/udos-wizard-adapter.env.example`
 - `config/runtime/runtime.yaml.example`
+- `config/runtime/git-repos.yaml.example`
+- `config/policy/github-action-policy.json.example`
 - `config/network/network.yaml.example`
 - `config/publish/publish.yaml.example`
 - `contracts/udos-commandd/api-envelope.schema.json`

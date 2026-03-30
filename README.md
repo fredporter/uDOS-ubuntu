@@ -14,6 +14,8 @@ host lane for uDOS deployments.
 - browser command-centre hosting and setup story
 - always-on runtime host posture
 - local network, vault, sync, and scheduled-operation host posture
+- central local repo-store posture for family repos
+- host-side Git and GitHub execution surfaces
 - shared API, budgeting, security, and policy enforcement at the runtime edge
 - local and remote-aware AI or model hosting gateways for the family runtime
 
@@ -52,6 +54,7 @@ It should host the official base command centre:
 - API access and budget enforcement
 - security and shared policy gates
 - vault and sync services
+- Git or GitHub repo operations
 - scheduled operations
 
 It is installed and recovered through `sonic-screwdriver`, grounded in
@@ -67,6 +70,7 @@ Runtime planning references:
 
 - `docs/systemd-unit-plan.md`
 - `docs/config-layout.md`
+- `docs/git-repo-store.md`
 
 Run the local validation entrypoint with:
 

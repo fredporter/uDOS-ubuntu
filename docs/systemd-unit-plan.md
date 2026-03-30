@@ -27,6 +27,7 @@ Primary units:
 - `udos-commandd.service`
 - `udos-vaultd.service`
 - `udos-syncd.service`
+- `udos-gitd.service`
 - `udos-scheduled.service`
 - `udos-networkd.service`
 - `udos-budgetd.service`
@@ -47,20 +48,21 @@ The minimum always-on chain is:
 2. `udos-commandd.service`
 3. `udos-vaultd.service`
 4. `udos-syncd.service`
-5. `udos-scheduled.service`
-6. `udos-networkd.service`
-7. `udos-budgetd.service`
-8. `udos-web.service`
+5. `udos-gitd.service`
+6. `udos-scheduled.service`
+7. `udos-networkd.service`
+8. `udos-budgetd.service`
+9. `udos-web.service`
 
 Operator surfaces may start after the command-centre core is available:
 
-9. `udos-tuid.service`
-10. `udos-thinui.service`
+10. `udos-tuid.service`
+11. `udos-thinui.service`
 
 Optional adapters start last:
 
-11. `udos-wizard-adapter.service`
-12. `udos-wordpress.service`
+12. `udos-wizard-adapter.service`
+13. `udos-wordpress.service`
 
 ## Unit Roles
 
@@ -141,6 +143,24 @@ Requires:
 
 - `udos-commandd.service`
 
+### `udos-gitd.service`
+
+Purpose:
+
+- canonical local repo-store supervision
+- Git status, fetch, branch, pull, and push execution
+- GitHub CLI and MCP adapter handoff under host policy
+- scheduled repo reconcile support for other services
+
+After:
+
+- `udos-commandd.service`
+- `udos-syncd.service`
+
+Requires:
+
+- `udos-commandd.service`
+
 ### `udos-networkd.service`
 
 Purpose:
@@ -181,6 +201,7 @@ After:
 - `udos-commandd.service`
 - `udos-vaultd.service`
 - `udos-syncd.service`
+- `udos-gitd.service`
 - `udos-scheduled.service`
 - `udos-networkd.service`
 - `udos-budgetd.service`

@@ -5,7 +5,7 @@ command-centre services.
 
 ## Purpose
 
-The service wrappers in `scripts/` are not real daemons yet. They are starter
+Most service wrappers in `scripts/` are not real daemons yet. They are starter
 entrypoints that:
 
 - load the expected service identity
@@ -18,6 +18,7 @@ entrypoints that:
 - `scripts/udos-commandd.sh`
 - `scripts/udos-vaultd.sh`
 - `scripts/udos-syncd.sh`
+- `scripts/udos-gitd.sh`
 - `scripts/udos-scheduled.sh`
 - `scripts/udos-networkd.sh`
 - `scripts/udos-budgetd.sh`
@@ -38,6 +39,7 @@ Example:
 bash scripts/udos-hostd.sh
 bash scripts/udos-commandd.sh
 bash scripts/udos-vaultd.sh
+bash scripts/udos-gitd.sh
 bash scripts/udos-web.sh
 ```
 
@@ -50,14 +52,27 @@ Each command should print:
 - log directory
 - `status=stub-ready`
 
+`scripts/udos-gitd.sh` now also supports a bounded local repo-store CLI:
+
+- `init-layout`
+- `repo-list`
+- `repo-attach <repo-id> <path>`
+- `repo-clone <repo-id> <remote-url> [branch]`
+- `repo-status <repo-id>`
+- `repo-fetch <repo-id>`
+- `repo-branch <repo-id> <branch>`
+- `repo-pull <repo-id>`
+- `repo-push <repo-id>`
+
 ## Current Scope
 
-This scaffold does not yet:
+This scaffold still does not yet:
 
 - expose real HTTP APIs
 - daemonize or long-run
-- implement actual command routing
-- implement vault, sync, schedule, or network logic
+- implement commandd-backed approval or policy routing
+- implement full GitHub CLI or MCP brokering
+- implement long-running vault, sync, schedule, or network daemons
 
 It exists to lock the service names, wrapper paths, and install assumptions
 before deeper implementation begins.
