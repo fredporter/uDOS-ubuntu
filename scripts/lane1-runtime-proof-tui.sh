@@ -49,11 +49,20 @@ rule
 
 echo ""
 rule
+bold "3b) Operator-readable surface (not JSON-only)"
+rule
+python3 "$UBUNTU_ROOT/scripts/lib/human_readable_demo.py" "$UBUNTU_ROOT/examples/browser-workstation-scaffold.json"
+echo ""
+python3 "$UBUNTU_ROOT/scripts/lib/human_readable_demo.py" --kind thinui "$UBUNTU_ROOT/examples/thinui-c64-launch.json"
+
+echo ""
+rule
 bold "Lane 1 terminal proof: complete"
 rule
 printf '\033[2m%s\033[0m\n' "  Open-work reminder: Core + Grid checks above are full-suite / contract validation."
 printf '\033[2m%s\033[0m\n' "  Ubuntu: lane-1 HTTP daemons incl. commandd + six aux (see verify-udos-runtime-daemons.sh); deeper product behaviour still open."
 printf '\033[2m%s\033[0m\n' "  Per-step WORKING vs SCAFFOLD vs STUB + open queue: bash $UBUNTU_ROOT/scripts/runtime-spine-workspace-tui.sh"
+printf '\033[2m%s\033[0m\n' "  Round not closed without Step [3/3]: browser GUI — bash $UBUNTU_ROOT/scripts/serve-command-centre-demo.sh (see uDOS-dev/docs/round-closure-three-steps.md)"
 echo ""
 # shellcheck source=scripts/lib/udos-web-listen.sh
 . "$UBUNTU_ROOT/scripts/lib/udos-web-listen.sh"

@@ -35,6 +35,7 @@ WORKSPACE_FILE="$FAMILY_ROOT/cursor-01-runtime-spine.code-workspace"
 
 CURRENT_PHASE=""
 SUMMARY_ROWS=""
+WIZARD_RECAP_MSG=""
 
 bold() { printf '\033[1m%s\033[0m\n' "$*"; }
 dim() { printf '\033[2m%s\033[0m\n' "$*"; }
@@ -92,6 +93,25 @@ print_legend() {
   dim "    WORKING   — real output validated (tests, HTTP body, registry/CLI lines)."
   dim "    SCAFFOLD  — contracts + layout + partial tooling; full daemons/product still open."
   dim "    STUB      — placeholder or presence-only; pass ≠ production feature."
+  dim "  Human-readable surfaces: Phase 2 prints workstation + ThinUI intent (prose); Phase 5 lists closure docs;"
+  dim "    closing recap below translates phases into operator language."
+  echo ""
+}
+
+# Plain-language recap so the TUI ends with what was *shown*, not only tags.
+print_operator_narrative_recap() {
+  rule
+  bold "What this run demonstrated (operator language)"
+  rule
+  echo "  • Phase 0 — The static command-centre page is served over HTTP and contains the expected title text"
+  echo "    (automated curl; not a substitute for opening a real browser — that is step [3/3])."
+  echo "  • Phase 1 — uDOS-core contracts, enforcement gates, and the green_proof test slice all passed."
+  echo "  • Phase 2 — uDOS-ubuntu layout + lane-1 daemons + checks passed; you saw readable workstation/ThinUI"
+  echo "    intent and live repo-operation rows from commandd (not just JSON dumps)."
+  echo "${WIZARD_RECAP_MSG:-  • Phase 3 — uDOS-wizard: not summarized.}"
+  echo "  • Phase 4 — uDOS-grid spatial contracts and checks passed."
+  echo "  • Phase 5 — Closure pathway artefacts are present (workspace file, runtime spine, round steps, pathway doc)."
+  echo "  • Phase 6 — uDOS-docs public hub checks passed (Node generator + required artefacts)."
   echo ""
 }
 
@@ -198,6 +218,7 @@ bold "Phase 0 — Localhost web / command-centre GUI (automated)"
 rule
 feature working "verify-command-centre-http.sh — curl 127.0.0.1 + localhost; body contains GUI title text"
 bash "$SCRIPT_DIR/verify-command-centre-http.sh"
+dim "  Note: Phase 0 proves the HTML artefact over HTTP only — step [3/3] still needs a browser."
 ok "  Phase 0 complete."
 pause_phase
 
@@ -222,13 +243,17 @@ bold "Phase 2 — uDOS-ubuntu (host spine + commandd/gitd)"
 rule
 feature scaffold "run-ubuntu-checks.sh — file/contract gates + layout + verify-udos-runtime-daemons (all lane-1 HTTP daemons incl. commandd + aux); deeper product semantics still open"
 ( cd "$UBUNTU_ROOT" && bash scripts/run-ubuntu-checks.sh )
-feature working "udos-commandd list-operations repo — real operation rows from JSON registry (temp UDOS_HOME)"
+feature working "Operator-readable demo layer — workstation + ThinUI intent (not JSON-only)"
+python3 "$UBUNTU_ROOT/scripts/lib/human_readable_demo.py" "$UBUNTU_ROOT/examples/browser-workstation-scaffold.json"
+python3 "$UBUNTU_ROOT/scripts/lib/human_readable_demo.py" --kind thinui "$UBUNTU_ROOT/examples/thinui-c64-launch.json"
+feature working "udos-commandd list-operations repo — live registry rows (temp UDOS_HOME)"
 (
   TMP_HOME="$(mktemp -d)"
   export UDOS_HOME="$TMP_HOME/.udos"
   bash "$UBUNTU_ROOT/scripts/udos-hostd.sh" layout-only >/dev/null
   bash "$UBUNTU_ROOT/scripts/udos-gitd.sh" init-layout >/dev/null
-  bash "$UBUNTU_ROOT/scripts/udos-commandd.sh" list-operations repo | head -n 8
+  echo "  ── Repo domain operations (sample) ──"
+  bash "$UBUNTU_ROOT/scripts/udos-commandd.sh" list-operations repo | head -n 12
   rm -rf "$TMP_HOME"
 )
 ok "  Phase 2 complete."
@@ -242,9 +267,11 @@ rule
 if [ "${SKIP_WIZARD:-0}" = "1" ]; then
   dim "  SKIP_WIZARD=1 — phase skipped"
   feature stub "run-wizard-checks.sh — not executed (set SKIP_WIZARD=0 for full round closure)"
+  WIZARD_RECAP_MSG="  • Phase 3 — uDOS-wizard: skipped (SKIP_WIZARD=1 — not valid for full Workspace 01 closure)."
 else
   feature scaffold "run-wizard-checks.sh — API/contract tests green; full production broker + host uptime out of scope for lane 1"
   ( cd "$WIZARD_ROOT" && bash scripts/run-wizard-checks.sh )
+  WIZARD_RECAP_MSG="  • Phase 3 — uDOS-wizard: broker/API contract checks passed (production broker uptime is later lanes)."
   ok "  Phase 3 complete."
 fi
 pause_phase
@@ -262,13 +289,22 @@ pause_phase
 # --- uDOS-dev ---
 CURRENT_PHASE="P5 uDOS-dev"
 rule
-bold "Phase 5 — uDOS-dev (pathway + execution docs)"
+bold "Phase 5 — uDOS-dev (pathway + round closure docs)"
 rule
-feature stub "pathway fingerprints only — workspace file + runtime-spine.md + cursor-execution.md exist"
+feature working "cursor-01 workspace file + runtime spine + execution order on disk"
 test -f "$WORKSPACE_FILE"
 test -f "$DEV_ROOT/docs/runtime-spine.md"
 test -f "$DEV_ROOT/docs/cursor-execution.md"
-ok "  pathway artefacts present."
+feature working "round-closure-three-steps.md — mandatory steps 1–3 (incl. browser GUI) for WS 01 + 02"
+test -f "$DEV_ROOT/docs/round-closure-three-steps.md"
+feature working "runtime-spine-workspace-round-closure.md — detailed Workspace 01 pathway"
+test -f "$DEV_ROOT/@dev/pathways/runtime-spine-workspace-round-closure.md"
+echo "  ── Where to read how to close the round ──"
+echo "    • $WORKSPACE_FILE"
+echo "    • $DEV_ROOT/docs/runtime-spine.md — lane-1 ownership and service map"
+echo "    • $DEV_ROOT/docs/round-closure-three-steps.md — automated + TUI + browser step [3/3]"
+echo "    • $DEV_ROOT/@dev/pathways/runtime-spine-workspace-round-closure.md — commands and LAN proof"
+ok "  Phase 5 complete."
 pause_phase
 
 # --- uDOS-docs ---
@@ -284,12 +320,14 @@ echo ""
 rule
 bold "Runtime spine workspace TUI cycle: complete"
 rule
+print_operator_narrative_recap
 print_summary_table
 print_reporting_rollup_and_open_queue
 # shellcheck source=scripts/lib/udos-web-listen.sh
 . "$SCRIPT_DIR/lib/udos-web-listen.sh"
-echo "  Manual GUI: run  bash $UBUNTU_ROOT/scripts/serve-command-centre-demo.sh"
-echo "  Then open    $(udos_web_base_url)  in a browser on this host."
-echo "  LAN / stay up:  $UBUNTU_ROOT/docs/lan-command-centre-persistent.md"
-echo "                  (serve-command-centre-demo-lan.sh or install-command-centre-demo-lan-user-service.sh)"
+echo "  Step [3/3] MANDATORY — final GUI render (round not closed without browser):"
+echo "    bash $UBUNTU_ROOT/scripts/serve-command-centre-demo.sh"
+echo "    or LAN: bash $UBUNTU_ROOT/scripts/serve-command-centre-demo-lan.sh"
+echo "  Open the printed URL and SEE the command-centre page. Doc: uDOS-dev/docs/round-closure-three-steps.md"
+echo "  LAN persistence: $UBUNTU_ROOT/docs/lan-command-centre-persistent.md"
 echo ""

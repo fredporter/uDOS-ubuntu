@@ -14,6 +14,8 @@
 
 This validates required repository surfaces and template assets.
 
+**Shell note:** A bare `run-ubuntu-checks.sh` is only found if it is on your `PATH`. From the repo root use `./scripts/run-ubuntu-checks.sh` or `bash scripts/run-ubuntu-checks.sh`. From `scripts/`, use `./run-ubuntu-checks.sh`.
+
 ## First-time Linux (public repo, full family litmus)
 
 If this is a **fresh Linux machine** and you are cloning **`uDOS-ubuntu`** from GitHub (or similar) for the first time, use:
@@ -29,10 +31,11 @@ Inspect the current scaffold manifest with:
 cat examples/browser-workstation-scaffold.json
 ```
 
-Emit the command-centre demo story with:
+Emit the workstation story with **operator-readable prose** first (JSON only if `UDOS_DEMO_INCLUDE_RAW_JSON=1`):
 
 ```bash
 bash scripts/demo-browser-workstation.sh
+bash scripts/demo-first-run-setup.sh
 ```
 
 Planning references:

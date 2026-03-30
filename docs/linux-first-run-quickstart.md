@@ -1,13 +1,13 @@
 # Linux first run — uDOS-ubuntu (public repo litmus)
 
-Use this when a machine has **never** had the uDOS family checked out. You clone **`uDOS-ubuntu` only** from the public Git host; one script pulls the **runtime-spine** sibling repos, installs common OS packages, adds minimal Python packages for Core tests, and runs **`runtime-spine-round-proof.sh`** (HTTP verify + full workspace TUI).
+Use this when a machine has **never** had the uDOS family checked out. You clone **`uDOS-ubuntu` only** from the public Git host; one script pulls the **runtime-spine** sibling repos, installs common OS packages, adds minimal Python packages for Core tests, and runs **`runtime-spine-round-proof.sh`** (automated **[1/3][2/3]** only — you still owe **[3/3] browser GUI** per `uDOS-dev/docs/round-closure-three-steps.md`).
 
 ## What you get
 
 - Siblings next to `uDOS-ubuntu`: `uDOS-core`, `uDOS-grid`, `uDOS-wizard`, `uDOS-dev`, `uDOS-docs` (same layout as `cursor-01-runtime-spine.code-workspace`).
 - **Debian/Ubuntu:** `apt-get install` for `git`, `curl`, `ca-certificates`, `python3`, `python3-venv`, `python3-pip`, `nodejs`, `npm`, and **`python3.11`** when the package exists (helps **uDOS-wizard** checks).
 - **pip (user):** `pytest`, `jsonschema`, `referencing` if `pytest` is missing (for **uDOS-core**).
-- **Verification:** full **`scripts/runtime-spine-round-proof.sh`** (must pass to treat the install as good).
+- **Verification:** **`scripts/runtime-spine-round-proof.sh`** completes automated **[1/3][2/3]** (must pass). **Step [3/3] — final GUI render** in a real browser is still **mandatory** to close Workspace 01; see **`uDOS-dev/docs/round-closure-three-steps.md`**.
 
 ## Requirements
 
@@ -56,6 +56,10 @@ bash scripts/linux-family-bootstrap.sh
 ```
 
 ## After bootstrap succeeds
+
+**Invoking scripts:** use `bash scripts/<name>.sh` from the `uDOS-ubuntu` root, or `cd scripts && ./<name>.sh`. A bare `<name>.sh` will not resolve unless that directory is on your `PATH`.
+
+**After bootstrap:** you still owe **step [3/3]** — open the command-centre in a **browser** and record sign-off (`uDOS-dev/docs/round-closure-three-steps.md`).
 
 1. **Browser (static command-centre GUI):**
 

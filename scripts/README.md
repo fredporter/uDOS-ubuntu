@@ -1,6 +1,6 @@
 # Scripts
 
-- `run-ubuntu-checks.sh`: validates repository structure and starter artifacts
+- `run-ubuntu-checks.sh`: validates repository structure and starter artifacts (run as `bash scripts/run-ubuntu-checks.sh` from repo root, or `./run-ubuntu-checks.sh` from `scripts/` — not a bare filename unless `PATH` includes that directory)
 - `serve-command-centre-demo.sh`: serves `examples/command-centre-demo/` using `UDOS_WEB_BIND` / `UDOS_WEB_PORT` (defaults in `scripts/lib/udos-web-listen.sh`; contract `contracts/udos-web/command-centre-static-demo.v1.json`)
 - `serve-command-centre-demo-lan.sh`: same demo bound to `0.0.0.0` for other machines on the LAN (`docs/lan-command-centre-persistent.md`)
 - `install-command-centre-demo-lan-user-service.sh`: installs `systemd --user` unit so the LAN demo survives SSH disconnect (`--now` / `--remove`)
@@ -8,7 +8,7 @@
 - `verify-command-centre-http.sh`: automated localhost HTTP proof for the command-centre page (ephemeral port + curl)
 - `verify-udos-runtime-daemons.sh`: hostd / vaultd / syncd / **udos-commandd** / udos-web on ephemeral ports (health, `/host/*`, **commandd** `/v1/*`, local-state POST/GET)
 - `runtime-spine-workspace-tui.sh`: TUI-style cycle through every repo in `cursor-01-runtime-spine.code-workspace`
-- `runtime-spine-round-proof.sh`: runs HTTP verify then the full workspace TUI (round closure entrypoint)
+- `runtime-spine-round-proof.sh`: automated **steps [1/3][2/3]** only — HTTP verify + full workspace TUI; prints mandatory **step [3/3] final GUI render** instructions (see `uDOS-dev/docs/round-closure-three-steps.md`)
 - `linux-family-bootstrap.sh`: first-time Linux litmus — apt deps, clone runtime-spine siblings, pip extras, run round proof; **re-runs upgrade ubuntu + siblings, heal bad clones, refresh pip** (`docs/linux-first-run-quickstart.md`)
 - `demo-first-run-setup.sh`: emits the current Ubuntu first-run story
 - `demo-browser-workstation.sh`: emits the current command-centre/browser scaffold story
@@ -16,3 +16,4 @@
 - `udos-gitd.sh`: bounded repo-store CLI and starter wrapper for host-side Git or GitHub actions
 - `udos-*.sh`: starter local service wrappers for the command-centre service set
 - `lib/runtime-layout.sh`: canonical `~/.udos/` directory layout (sourced from `udos-hostd.sh`)
+- `lib/human_readable_demo.py`: turns `examples/*-scaffold.json` / ThinUI launch JSON into **operator-facing terminal prose** (used by `demo-first-run-setup.sh`, `demo-browser-workstation.sh`, and workspace TUI). Demos default to readable text; set **`UDOS_DEMO_INCLUDE_RAW_JSON=1`** to also print raw JSON.

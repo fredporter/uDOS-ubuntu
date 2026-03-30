@@ -279,15 +279,19 @@ if [ "${UDOS_SKIP_ROUND_PROOF:-0}" = "1" ]; then
 fi
 
 info ""
-info "Running full runtime spine round proof (HTTP + workspace TUI)..."
+info "Running runtime spine round proof (automated steps [1/3][2/3] only)..."
 bash "$UBUNTU_ROOT/scripts/runtime-spine-round-proof.sh"
 
 install_lan_user_service_if_requested
 
 info ""
 info "Bootstrap complete."
-info "Command-centre (browser): bash $UBUNTU_ROOT/scripts/serve-command-centre-demo.sh"
-info "LAN / keep running:       docs/lan-command-centre-persistent.md"
+info "MANDATORY Step [3/3] — final GUI render (round not closed without this):"
+info "  bash $UBUNTU_ROOT/scripts/serve-command-centre-demo.sh"
+info "  or LAN: bash $UBUNTU_ROOT/scripts/serve-command-centre-demo-lan.sh"
+info "  Open the URL in a real browser; record sign-off in uDOS-dev @dev/notes/rounds/ or devlog."
+info "Doc: uDOS-dev/docs/round-closure-three-steps.md"
+info "LAN persistence: docs/lan-command-centre-persistent.md"
 # shellcheck source=scripts/lib/udos-web-listen.sh
 . "$UBUNTU_ROOT/scripts/lib/udos-web-listen.sh"
 udos_web_resolve_listen
