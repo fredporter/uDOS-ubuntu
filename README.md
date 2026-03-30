@@ -76,6 +76,8 @@ Run the local validation entrypoint with:
 
 scripts/run-ubuntu-checks.sh
 
+**Linux first install from the public repo (clone uDOS-ubuntu only, then one script):** see `docs/linux-first-run-quickstart.md` and `scripts/linux-family-bootstrap.sh`.
+
 Run the current first-run demo story with:
 
 ```bash

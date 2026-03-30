@@ -5,52 +5,74 @@ command-centre services.
 
 ## Purpose
 
-Most service wrappers in `scripts/` are not real daemons yet. They are starter
-entrypoints that:
+**Lane 1 (Workspace 01):** **hostd**, **web**, **vaultd**, **syncd**, **commandd**, and the six **aux** roles (**budgetd**, **networkd**, **scheduled**, **tuid**, **thinui**, **wizard-adapter**) are **long-running HTTP listeners** implemented in **`scripts/lib/runtime_daemon_httpd.py`** (each `udos-*.sh` wrapper **exec**s the matching mode). **udos-web** serves the static command-centre plus the full Wizard **`/host/*`** surface (see `contracts/udos-web/wizard-host-surface.v1.json`). **`scripts/lib/service-stub.sh`** remains in-tree for future lane-N stubs; lane-1 aux daemons no longer use it.
+
+Older stubs were starter entrypoints that:
 
 - load the expected service identity
 - create the matching state/log directories under `~/.udos/`
 - prove the naming and boot plan are coherent
 
-## Current Stub Entry Points
+## Host bootstrap (layout)
 
-- `scripts/udos-hostd.sh`
-- `scripts/udos-commandd.sh`
-- `scripts/udos-vaultd.sh`
-- `scripts/udos-syncd.sh`
+`scripts/udos-hostd.sh` runs `ud_os_ensure_runtime_layout` then starts the **hostd** HTTP listener (layout manifest at `GET /v1/runtime-layout.json`). It creates:
+
+- `~/.udos/` roots (bin, envs, state, vault, publish, sync, memory, library, logs,
+  cache, tmp, repos, …)
+- vault subfolders (`vault/inbox`, `vault/projects`, `vault/library`)
+- sync queue folders (`sync/queue`, `sync/archive`)
+- `publish/static`
+- A manifest: `~/.udos/state/hostd/runtime-layout.json`
+
+## Real daemon entry points (lane 1)
+
+- `scripts/udos-hostd.sh` — layout then **hostd** HTTP (`/health.json`, `/v1/runtime-layout.json`); **`layout-only`** first argument materializes `~/.udos/` and exits (used by `run-ubuntu-checks.sh`)
+- `scripts/udos-web.sh` — layout (best-effort) then **web** HTTP (static command-centre + Wizard **`/host/*`**: local-state, contract, runtime-summary, orchestration-status, **budget-status**, **providers**, **secrets** GET + POST 403; defaults under `config/host/`, overlays `~/.udos/state/host/`)
+- `scripts/udos-vaultd.sh` — **vaultd** HTTP (`/health.json`, `/v1/status` with **`vault_paths`** probes)
+- `scripts/udos-syncd.sh` — **syncd** HTTP (`/health.json`, `/v1/status` with **`sync_paths`** probes)
+- `scripts/udos-budgetd.sh`, `udos-networkd.sh`, `udos-scheduled.sh`, `udos-tuid.sh`, `udos-thinui.sh`, `udos-wizard-adapter.sh` — **aux** HTTP (`/health.json`, `/v1/status`; product logic deferred)
+
+Automated proof: `scripts/verify-udos-runtime-daemons.sh`.
+
+## commandd HTTP (lane 1)
+
+- `scripts/udos-commandd.sh` with default **`serve`** (no subcommand) **exec**s `runtime_daemon_httpd.py commandd` on **`UDOS_COMMANDD_PORT`** (default **7101**, bind **`UDOS_COMMANDD_BIND`**).
+- JSON routes: `GET /health.json`, `GET /v1/policy-summary`, `GET /v1/list-operations?domain=`, `GET /v1/surface-summary?surface=wizard|git`, `GET /v1/wizard-host-surface.json`, `POST /v1/repo-op` with body `{"operation_id":"…","arguments":[]}` (shells the same bash script for each request).
+
+Use **`udos-commandd.sh stub`** for the legacy one-line **commandd-ready** print (exits immediately).
+
+## Non-stub CLI / one-shot (subcommands)
+
+- `scripts/udos-commandd.sh` — `list-operations`, `surface-summary`, `policy-summary`, `repo-op` (also used internally by the HTTP listener)
 - `scripts/udos-gitd.sh`
-- `scripts/udos-scheduled.sh`
-- `scripts/udos-networkd.sh`
-- `scripts/udos-budgetd.sh`
-- `scripts/udos-web.sh`
-- `scripts/udos-tuid.sh`
-- `scripts/udos-thinui.sh`
-- `scripts/udos-wizard-adapter.sh`
 
-Shared helper:
+Shared helpers:
 
-- `scripts/lib/service-stub.sh`
+- `scripts/lib/service-stub.sh` (optional helper for future non-HTTP stubs)
+- `scripts/lib/runtime_daemon_httpd.py` (hostd / web / vaultd / syncd / commandd / six aux modes)
+- `scripts/lib/runtime-layout.sh` (sourced by `udos-hostd.sh` and **udos-web.sh** to create `~/.udos/` layout)
 
 ## Local Manual Run
 
-Example:
+Long-running daemons (each blocks the terminal until Ctrl+C):
 
 ```bash
-bash scripts/udos-hostd.sh
+bash scripts/udos-hostd.sh              # blocks: layout + hostd HTTP
+bash scripts/udos-hostd.sh layout-only  # exits after layout (CI / prep)
 bash scripts/udos-commandd.sh
 bash scripts/udos-vaultd.sh
-bash scripts/udos-gitd.sh
+bash scripts/udos-syncd.sh
 bash scripts/udos-web.sh
 ```
 
-Each command should print:
+One-shot **stub** status (prints **commandd-ready** / layout lines and exits): `bash scripts/udos-commandd.sh stub`.
 
-- service id
-- configured port
-- `UDOS_HOME`
-- state directory
-- log directory
-- `status=stub-ready`
+CLI examples (exit after output):
+
+```bash
+bash scripts/udos-gitd.sh init-layout
+bash scripts/udos-commandd.sh list-operations repo
+```
 
 `scripts/udos-gitd.sh` now also supports a bounded local repo-store CLI:
 
@@ -66,16 +88,9 @@ Each command should print:
 
 ## Current Scope
 
-This scaffold still does not yet:
+**In place for lane 1:** HTTP listeners for hostd, web (static + `/host/*`), vaultd, syncd, commandd, and minimal aux daemons; `udos-hostd` materializes the full `~/.udos/` tree; `udos-commandd` and `udos-gitd` implement the bounded repo and policy surface in `contracts/udos-commandd/` and `docs/git-repo-store.md`.
 
-- expose real HTTP APIs
-- daemonize or long-run
-- implement commandd-backed approval or policy routing
-- implement full GitHub CLI or MCP brokering
-- implement long-running vault, sync, schedule, or network daemons
-
-It exists to lock the service names, wrapper paths, and install assumptions
-before deeper implementation begins.
+**Still deferred:** vault encryption workers, sync execution, schedule/network/budget product semantics, TLS, full GitHub CLI or MCP brokering, and commandd-backed approval flows beyond the current registry + `repo-op` surface.
 
 ## Next Layer
 

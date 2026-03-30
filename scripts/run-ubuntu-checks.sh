@@ -35,6 +35,8 @@ require_file "$REPO_ROOT/CHANGELOG.md"
 require_file "$REPO_ROOT/docs/architecture.md"
 require_file "$REPO_ROOT/docs/boundary.md"
 require_file "$REPO_ROOT/docs/getting-started.md"
+require_file "$REPO_ROOT/docs/linux-first-run-quickstart.md"
+require_file "$REPO_ROOT/docs/lan-command-centre-persistent.md"
 require_file "$REPO_ROOT/docs/examples.md"
 require_file "$REPO_ROOT/docs/activation.md"
 require_file "$REPO_ROOT/docs/systemd-unit-plan.md"
@@ -47,8 +49,12 @@ require_file "$REPO_ROOT/contracts/udos-commandd/operation-registry.v1.json"
 require_file "$REPO_ROOT/contracts/udos-commandd/minimum-operations.v1.json"
 require_file "$REPO_ROOT/contracts/udos-commandd/wizard-host-surface.v1.json"
 require_file "$REPO_ROOT/contracts/udos-commandd/git-host-surface.v1.json"
+require_file "$REPO_ROOT/contracts/udos-web/command-centre-static-demo.v1.json"
 require_file "$REPO_ROOT/build/README.md"
 require_file "$REPO_ROOT/config/README.md"
+require_file "$REPO_ROOT/config/host/README.md"
+require_file "$REPO_ROOT/config/host/budget-status.lane1.json"
+require_file "$REPO_ROOT/config/host/providers.lane1.json"
 require_file "$REPO_ROOT/config/packages.list"
 require_file "$REPO_ROOT/config/policy/README.md"
 require_file "$REPO_ROOT/config/policy/github-action-policy.json.example"
@@ -65,10 +71,24 @@ require_file "$REPO_ROOT/examples/thinui-c64-launch.json"
 require_file "$REPO_ROOT/examples/browser-workstation-scaffold.json"
 require_file "$REPO_ROOT/examples/google-mvp-host-profile.json"
 require_file "$REPO_ROOT/examples/README.md"
+require_file "$REPO_ROOT/examples/command-centre-demo/index.html"
+require_file "$REPO_ROOT/scripts/serve-command-centre-demo.sh"
+require_file "$REPO_ROOT/scripts/lib/serve_static_http.py"
+require_file "$REPO_ROOT/scripts/lane1-runtime-proof-tui.sh"
+require_file "$REPO_ROOT/scripts/verify-command-centre-http.sh"
+require_file "$REPO_ROOT/scripts/lib/runtime_daemon_httpd.py"
+require_file "$REPO_ROOT/scripts/verify-udos-runtime-daemons.sh"
+require_file "$REPO_ROOT/scripts/runtime-spine-workspace-tui.sh"
+require_file "$REPO_ROOT/scripts/runtime-spine-round-proof.sh"
+require_file "$REPO_ROOT/scripts/linux-family-bootstrap.sh"
+require_file "$REPO_ROOT/scripts/serve-command-centre-demo-lan.sh"
+require_file "$REPO_ROOT/scripts/install-command-centre-demo-lan-user-service.sh"
 require_file "$REPO_ROOT/scripts/README.md"
 require_file "$REPO_ROOT/scripts/demo-first-run-setup.sh"
 require_file "$REPO_ROOT/scripts/demo-browser-workstation.sh"
 require_file "$REPO_ROOT/scripts/lib/service-stub.sh"
+require_file "$REPO_ROOT/scripts/lib/runtime-layout.sh"
+require_file "$REPO_ROOT/scripts/lib/udos-web-listen.sh"
 require_file "$REPO_ROOT/scripts/udos-hostd.sh"
 require_file "$REPO_ROOT/scripts/udos-commandd.sh"
 require_file "$REPO_ROOT/scripts/udos-vaultd.sh"
@@ -161,10 +181,39 @@ if github_policy.get("github_rules", {}).get("github.pr.create", {}).get("mode")
 missing_ops = [op for op in minimum_ops if op not in registry_ops]
 if missing_ops:
     raise SystemExit(f"minimum operations missing from operation registry: {missing_ops}")
+static_demo = json.loads((repo_root / "contracts" / "udos-web" / "command-centre-static-demo.v1.json").read_text(encoding="utf-8"))
+if static_demo.get("contract_id") != "udos-web.command-centre-static-demo.v1":
+    raise SystemExit("contracts/udos-web/command-centre-static-demo.v1.json contract_id mismatch")
+if static_demo.get("protocol_family") != "v2":
+    raise SystemExit("contracts/udos-web/command-centre-static-demo.v1.json protocol_family must be v2")
+web_env_text = (repo_root / "config" / "env" / "udos-web.env.example").read_text(encoding="utf-8")
+web_env = {}
+for line in web_env_text.splitlines():
+    line = line.strip()
+    if not line or line.startswith("#") or "=" not in line:
+        continue
+    k, v = line.split("=", 1)
+    web_env[k.strip()] = v.strip()
+web_bind = web_env.get("UDOS_WEB_BIND")
+web_port_s = web_env.get("UDOS_WEB_PORT")
+if web_bind is None or web_port_s is None:
+    raise SystemExit("config/env/udos-web.env.example must set UDOS_WEB_BIND and UDOS_WEB_PORT")
+web_port = int(web_port_s)
+if static_demo["defaults"]["bind"] != web_bind or static_demo["defaults"]["port"] != web_port:
+    raise SystemExit("command-centre-static-demo defaults must match udos-web.env.example")
+listen_sh = (repo_root / "scripts" / "lib" / "udos-web-listen.sh").read_text(encoding="utf-8")
+if f"UDOS_WEB_DEFAULT_BIND={web_bind}" not in listen_sh or f"UDOS_WEB_DEFAULT_PORT={web_port}" not in listen_sh:
+    raise SystemExit("scripts/lib/udos-web-listen.sh defaults must match udos-web.env.example")
 PY
 
 TMP_HOME="$(mktemp -d)"
 trap 'rm -rf "$TMP_HOME"' EXIT
+UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-hostd.sh" layout-only >/dev/null
+test -f "$TMP_HOME/.udos/state/hostd/runtime-layout.json"
+test -d "$TMP_HOME/.udos/vault/inbox"
+test -d "$TMP_HOME/.udos/sync/queue"
+test -d "$TMP_HOME/.udos/state/web"
+test -d "$TMP_HOME/.udos/repos"
 UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-gitd.sh" init-layout >/dev/null
 UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-gitd.sh" repo-list >/dev/null
 UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-gitd.sh" >/dev/null
@@ -179,6 +228,7 @@ printf '%s' "$github_gate_output" | grep -q 'status=policy-gated'
 
 if command -v rg >/dev/null 2>&1; then
   if rg -n '/Users/fredbook/Code|~/Users/fredbook/Code' \
+    --glob '!.compost/**' \
     "$REPO_ROOT/README.md" \
     "$REPO_ROOT/docs" \
     "$REPO_ROOT/examples" \
@@ -187,7 +237,7 @@ if command -v rg >/dev/null 2>&1; then
     exit 1
   fi
 else
-  if grep -RInE -I --exclude-dir='__pycache__' '/Users/fredbook/Code|~/Users/fredbook/Code' \
+  if grep -RInE -I --exclude-dir='__pycache__' --exclude-dir='.compost' '/Users/fredbook/Code|~/Users/fredbook/Code' \
     "$REPO_ROOT/README.md" \
     "$REPO_ROOT/docs" \
     "$REPO_ROOT/examples" \
@@ -196,5 +246,7 @@ else
     exit 1
   fi
 fi
+
+bash "$REPO_ROOT/scripts/verify-udos-runtime-daemons.sh"
 
 echo "uDOS-ubuntu checks passed"

@@ -4,6 +4,7 @@ set -eu
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+export UDOS_UBUNTU_ROOT="${UDOS_UBUNTU_ROOT:-$REPO_ROOT}"
 GITD_SCRIPT="$REPO_ROOT/scripts/udos-gitd.sh"
 SERVICE_ID="udos-commandd"
 SERVICE_PORT="${UDOS_COMMANDD_PORT:-7101}"
@@ -226,7 +227,12 @@ cmd_repo_operation() {
 }
 
 case "${1:-serve}" in
-  serve|stub)
+  serve)
+    BIND="${UDOS_COMMANDD_BIND:-127.0.0.1}"
+    PORT="${UDOS_COMMANDD_PORT:-7101}"
+    exec python3 "$SCRIPT_DIR/lib/runtime_daemon_httpd.py" commandd --bind "$BIND" --port "$PORT"
+    ;;
+  stub|status)
     print_stub_status
     ;;
   list-operations)
@@ -246,7 +252,7 @@ case "${1:-serve}" in
     ;;
   *)
     echo "unknown command: $1" >&2
-    echo "expected one of: serve, list-operations, surface-summary, policy-summary, repo-op" >&2
+    echo "expected one of: serve, stub, list-operations, surface-summary, policy-summary, repo-op" >&2
     exit 1
     ;;
 esac

@@ -7,3 +7,8 @@ These are starter templates only. Host-installed units should be rendered into
 
 The current core set now includes `udos-gitd.service` for the host-owned local
 repo store and Git or GitHub execution surface.
+
+**Lane-1 demo on the LAN (lab / round continuity):** not installed to
+`/etc/systemd/system` by default. Use **`scripts/install-command-centre-demo-lan-user-service.sh`**
+to generate a **`systemd --user`** unit (bind `0.0.0.0`, default port 7107). See
+`docs/lan-command-centre-persistent.md`.

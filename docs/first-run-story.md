@@ -31,6 +31,27 @@ Browser command-centre demo entry:
 bash scripts/demo-browser-workstation.sh
 ```
 
+## Lane 1 closure proof (runtime spine)
+
+**Terminal (Core + Grid + Ubuntu):** from `uDOS-ubuntu`, with `uDOS-core` and
+`uDOS-grid` as sibling repos:
+
+```bash
+bash scripts/lane1-runtime-proof-tui.sh
+```
+
+**Browser (static command-centre page):** in another shell:
+
+```bash
+bash scripts/serve-command-centre-demo.sh
+```
+
+Open `http://127.0.0.1:7107/` — you should see the “uDOS command centre” page.
+  (Same `UDOS_WEB_BIND` / `UDOS_WEB_PORT` as `config/env/udos-web.env.example`; see
+  `contracts/udos-web/command-centre-static-demo.v1.json`.)
+
+(`uDOS-dev` / `uDOS-docs` proof can wait for a later lane.)
+
 ## ThinUI Payload
 
 - `examples/thinui-c64-launch.json`

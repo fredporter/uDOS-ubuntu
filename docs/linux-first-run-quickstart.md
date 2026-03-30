@@ -1,0 +1,149 @@
+# Linux first run — uDOS-ubuntu (public repo litmus)
+
+Use this when a machine has **never** had the uDOS family checked out. You clone **`uDOS-ubuntu` only** from the public Git host; one script pulls the **runtime-spine** sibling repos, installs common OS packages, adds minimal Python packages for Core tests, and runs **`runtime-spine-round-proof.sh`** (HTTP verify + full workspace TUI).
+
+## What you get
+
+- Siblings next to `uDOS-ubuntu`: `uDOS-core`, `uDOS-grid`, `uDOS-wizard`, `uDOS-dev`, `uDOS-docs` (same layout as `cursor-01-runtime-spine.code-workspace`).
+- **Debian/Ubuntu:** `apt-get install` for `git`, `curl`, `ca-certificates`, `python3`, `python3-venv`, `python3-pip`, `nodejs`, `npm`, and **`python3.11`** when the package exists (helps **uDOS-wizard** checks).
+- **pip (user):** `pytest`, `jsonschema`, `referencing` if `pytest` is missing (for **uDOS-core**).
+- **Verification:** full **`scripts/runtime-spine-round-proof.sh`** (must pass to treat the install as good).
+
+## Requirements
+
+- **OS:** Debian or Ubuntu (script uses `apt-get`). On other distros, install the equivalent packages manually and set `UDOS_SKIP_APT=1`.
+- **Git** and network access to your Git host.
+- **Python:** `uDOS-wizard` checks expect **Python 3.11+**. Ubuntu **24.04+** is ideal; on **22.04** the script tries `python3.11` from apt when available.
+- **Node:** required for **`uDOS-docs`** checks (`generate-site-data.mjs --check`).
+
+## One-command style flow
+
+Replace `<ORG>` with your GitHub org or user (or your full base URL logic).
+
+```bash
+git clone --depth 1 https://github.com/<ORG>/uDOS-ubuntu.git
+cd uDOS-ubuntu
+bash scripts/linux-family-bootstrap.sh
+```
+
+The script discovers **`UDOS_FAMILY_GIT_BASE`** from **`git remote get-url origin`** (e.g. `https://github.com/<ORG>/uDOS-ubuntu.git` → `https://github.com/<ORG>`). If that fails (no remote), set it explicitly:
+
+```bash
+export UDOS_FAMILY_GIT_BASE=https://github.com/<ORG>
+bash scripts/linux-family-bootstrap.sh
+```
+
+### Branch for shallow clones
+
+Default is **`main`**. Override if your default branch differs:
+
+```bash
+export UDOS_FAMILY_BRANCH=master
+bash scripts/linux-family-bootstrap.sh
+```
+
+### Custom layout
+
+By default, siblings are cloned into the **parent** of `uDOS-ubuntu`. To use another directory:
+
+```bash
+export UDOS_FAMILY_ROOT="$HOME/src/uDOS-family"
+mkdir -p "$UDOS_FAMILY_ROOT"
+cd "$UDOS_FAMILY_ROOT"
+git clone --depth 1 https://github.com/<ORG>/uDOS-ubuntu.git
+cd uDOS-ubuntu
+bash scripts/linux-family-bootstrap.sh
+```
+
+## After bootstrap succeeds
+
+1. **Browser (static command-centre GUI):**
+
+   ```bash
+   bash scripts/serve-command-centre-demo.sh
+   ```
+
+   Open the printed URL (usually `http://127.0.0.1:7107/`).
+
+2. **Automated HTTP check (no browser):**
+
+   ```bash
+   bash scripts/verify-command-centre-http.sh
+   ```
+
+3. **Re-run full litmus later:**
+
+   ```bash
+   bash scripts/runtime-spine-round-proof.sh
+   ```
+
+## Re-run anytime (self-upgrade + self-heal)
+
+The same command **updates** the install:
+
+```bash
+cd uDOS-ubuntu
+bash scripts/linux-family-bootstrap.sh
+```
+
+By default it will:
+
+- **`git fetch` / fast-forward** this **`uDOS-ubuntu`** repo to **`origin/$UDOS_FAMILY_BRANCH`** (default `main`). If new commits land, the script **re-invokes itself once** so you always run the **latest** `linux-family-bootstrap.sh` from the repo.
+- **Pull** sibling repos (`uDOS-core`, `uDOS-grid`, …) with **fast-forward** only.
+- **Heal** broken sibling trees: empty folder, missing `.git`, or corrupt git → **remove and re-clone** (with retries).
+- **Refresh** bootstrap pip packages (`pytest`, `jsonschema`, `referencing`) with **`-U`**.
+
+If your local checkout has **commits not on origin**, fast-forward will fail until you merge, rebase, or **discard**:
+
+```bash
+export UDOS_BOOTSTRAP_RESET_HARD=1
+bash scripts/linux-family-bootstrap.sh
+```
+
+That resets **`uDOS-ubuntu`** and each sibling (when pull fails) to **`origin/$BRANCH`**. Use only when you accept losing local diffs.
+
+Optional OS package upgrades:
+
+```bash
+export UDOS_APT_UPGRADE=1
+bash scripts/linux-family-bootstrap.sh
+```
+
+## Optional environment flags
+
+| Variable | Effect |
+| --- | --- |
+| `UDOS_SKIP_APT=1` | Do not run `apt-get` (you installed deps yourself). |
+| `UDOS_SKIP_ROUND_PROOF=1` | Only clone + pip prep; skip the long proof (then run it manually). |
+| `UDOS_SKIP_SELF_UPGRADE=1` | Do not pull or re-exec **`uDOS-ubuntu`** (frozen tree). |
+| `UDOS_SKIP_SIBLING_UPGRADE=1` | Do not `git pull` siblings (still heal missing/corrupt clones). |
+| `UDOS_SKIP_PIP_UPGRADE=1` | Only install pip deps if missing (no `-U`). |
+| `UDOS_APT_UPGRADE=1` | After `apt-get install`, run **`apt-get upgrade -y`**. |
+| `UDOS_BOOTSTRAP_RESET_HARD=1` | On ff-only failure, **`git reset --hard origin/$BRANCH`** for ubuntu + siblings. |
+| `UDOS_BOOTSTRAP_INSTALL_LAN_SERVICE=1` | After bootstrap, install **`systemd --user`** unit for LAN command-centre (`docs/lan-command-centre-persistent.md`). |
+
+## Leave the command-centre on the LAN (before closing the round)
+
+If the bootstrap **succeeds** and this machine will stay in service while you move to **cursor-02** or later lanes:
+
+1. Read **`docs/lan-command-centre-persistent.md`** (firewall, linger, security).
+2. Either run **`bash scripts/serve-command-centre-demo-lan.sh`** under **tmux** / **screen**, or install the **systemd user** unit:
+
+   ```bash
+   bash scripts/install-command-centre-demo-lan-user-service.sh --now
+   ```
+
+3. One-shot after a green bootstrap:
+
+   ```bash
+   export UDOS_BOOTSTRAP_INSTALL_LAN_SERVICE=1
+   bash scripts/linux-family-bootstrap.sh
+   ```
+
+Other devices on the same network can use **`http://<host-LAN-IP>:7107/`** (or your `UDOS_WEB_PORT`).
+
+## Closing this round / next workspace
+
+When this litmus passes on your Linux host, **Workspace 01 (runtime spine)** is operationally closed for your environment. Switch Cursor to **`cursor-02-foundation-distribution.code-workspace`** for install, Sonic, Ventoy, and distribution work (`docs/cursor-execution.md`).
+
+Canonical pathway notes: `uDOS-dev/@dev/pathways/runtime-spine-workspace-round-closure.md`.

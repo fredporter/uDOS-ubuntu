@@ -15,6 +15,7 @@ spec.
 - `udos-commandd/okd-surface.v1.json`
 - `udos-commandd/wizard-host-surface.v1.json`
 - `udos-commandd/git-host-surface.v1.json`
+- `udos-web/command-centre-static-demo.v1.json` — v2 static HTTP demo (lane 1; same `UDOS_WEB_*` as `config/env/udos-web.env.example`)
 
 ## Rule
 

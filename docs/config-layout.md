@@ -204,7 +204,7 @@ Do not put mutable runtime data in `config/`.
 
 Mutable runtime data belongs under `~/.udos/`, especially:
 
-- `~/.udos/state/`
+- `~/.udos/state/` (e.g. `state/web/local-state.json` for **`/host/local-state`**, `state/host/*.json` optional overlays for **`/host/budget-status`** and **`/host/providers`** on **udos-web**)
 - `~/.udos/vault/`
 - `~/.udos/publish/`
 - `~/.udos/sync/`

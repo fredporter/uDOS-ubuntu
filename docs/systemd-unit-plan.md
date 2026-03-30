@@ -6,9 +6,11 @@ centre.
 It is a planning contract for the always-on runtime host and should stay aligned
 to:
 
-- `uDOS-dev/docs/ubuntu-command-centre-topology.md`
-- `uDOS-dev/docs/ubuntu-runtime-process-map.md`
-- `uDOS-dev/docs/ubuntu-runtime-filesystem-contract.md`
+- `uDOS-dev/docs/runtime-spine.md` (family hub)
+- `uDOS-dev/docs/ubuntu-command-centre-reference.md` (compact command-centre ref)
+- `uDOS-ubuntu/docs/architecture.md` (host direction, failure rule, topology)
+- `uDOS-ubuntu/docs/config-layout.md` (`~/.udos/` layout contract)
+- this document (unit graph and process ordering)
 
 ## Goals
 
