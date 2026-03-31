@@ -151,3 +151,5 @@ Other devices on the same network can use **`http://<host-LAN-IP>:7107/`** (or y
 When this litmus passes on your Linux host, **Workspace 01 (runtime spine)** is operationally closed for your environment. Switch Cursor to **`cursor-02-foundation-distribution.code-workspace`** for install, Sonic, Ventoy, and distribution work (`docs/cursor-execution.md`).
 
 Canonical pathway notes: `uDOS-dev/@dev/pathways/runtime-spine-workspace-round-closure.md`.
+
+**Workspace 02 (foundation / distribution):** read **`uDOS-dev/docs/foundation-distribution.md`** for Sonic-first install order, `~/.udos/` ownership, and the Sonic/Ventoy split. After cloning **Sonic** (adjacent family root) and any extra siblings that workspace lists, run **`bash scripts/foundation-distribution-workspace-proof.sh`** from **`uDOS-ubuntu`** for the full lane-2 automated gate (still complete **step 3 — browser** on the command-centre demo per `uDOS-dev/docs/round-closure-three-steps.md`). Pathway: **`uDOS-dev/@dev/pathways/foundation-distribution-workspace-round-closure.md`**.

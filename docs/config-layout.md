@@ -3,6 +3,8 @@
 This document defines the intended checked-in config structure for the Ubuntu
 command-centre host.
 
+Family-wide install path standard and Sonic-first topology: `uDOS-dev/docs/foundation-distribution.md`.
+
 It separates:
 
 - repo-owned templates and defaults
