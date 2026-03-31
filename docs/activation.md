@@ -19,6 +19,23 @@ setup direction.
 
 Run:
 
-scripts/run-ubuntu-checks.sh
+```bash
+bash scripts/run-ubuntu-checks.sh
+bash scripts/verify-command-centre-http.sh
+```
 
-The command verifies required repository surfaces and key bootstrap templates.
+The checks verify required repository surfaces, runtime daemon smoke, and the
+command-centre HTTP marker.
+
+## GitHub Actions
+
+Workflows live under `.github/workflows/`:
+
+| Workflow | Role |
+| --- | --- |
+| **`validate.yml`** | On **push/PR to `main`**: `run-ubuntu-checks.sh` + `verify-command-centre-http.sh` (self-contained on GitHub runners). |
+| **`family-policy-check.yml`** | Same triggers: family **governance** file layout (`uDOS-dev` scripts) + **Core** `run-contract-enforcement.sh`. |
+
+There is **no** `develop` branch or automated promote job; integration is **`main`**
+only. Other family repos may still call reusable workflows from `uDOS-dev`; this
+repo is the **reference** for a slimmer, `main`-first layout.
