@@ -39,3 +39,8 @@ Workflows live under `.github/workflows/`:
 There is **no** `develop` branch or automated promote job; integration is **`main`**
 only. Other family repos may still call reusable workflows from `uDOS-dev`; this
 repo is the **reference** for a slimmer, `main`-first layout.
+
+### GitHub contract vs local source of truth
+
+- **GitHub contract** (documented family-wide in `uDOS-dev/@dev/notes/roadmap/v2-family-roadmap.md` § Engineering backlog): what Actions run on **`main`**, which sibling repos are checked out for governance/contracts, and that **`promote.yml` is not part of this repo’s contract**. CI must stay aligned with the scripts below—avoid duplicating logic in YAML only.
+- **Local source of truth:** your **clone of this repo** on the Ubuntu host plus **`~/.udos/`** materialised by `scripts/lib/runtime-layout.sh` and the `udos-*` host scripts. Operators and contributors treat **green `run-ubuntu-checks.sh` + `verify-command-centre-http.sh` on real hardware** as the ground truth; GitHub is a **mirror** of those entrypoints on `ubuntu-latest`.
