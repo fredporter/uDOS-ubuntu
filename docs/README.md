@@ -30,6 +30,18 @@ Use `/wiki` for beginner-friendly learning material and quick practical guides.
 - `first-run-story.md`
 - `google-mvp-runtime-mode.md`
 
+## Family library and publishing (sibling checkout)
+
+When this repo sits next to `uDOS-docs` in a family folder, runtime **docs**
+here stay canonical for Ubuntu; the **library site** (hubs, manifest, featured
+links) is authored in **`uDOS-docs`**:
+
+- [`uDOS-docs/docs/publishing-architecture.md`](../../uDOS-docs/docs/publishing-architecture.md)
+- [`uDOS-docs/docs/local-vs-github-docs-boundary.md`](../../uDOS-docs/docs/local-vs-github-docs-boundary.md)
+- [`uDOS-docs/docs/course-hooks-and-onboarding.md`](../../uDOS-docs/docs/course-hooks-and-onboarding.md)
+
+Wiki units under `wiki/` are listed from `uDOS-docs` `site/data/family-source.json` when promoted to the learning hub.
+
 ## Rule
 
 Keep stable reference here. Move planning to `@dev/`, and keep historical
