@@ -7,13 +7,16 @@
 - `install-command-centre-demo-lan-user-service.sh`: installs `systemd --user` unit so the LAN demo survives SSH disconnect (`--now` / `--remove`)
 - `lane1-runtime-proof-tui.sh`: runs Core + Grid + Ubuntu checks in one terminal session (lane 1)
 - `verify-command-centre-http.sh`: automated localhost HTTP proof for the command-centre page (ephemeral port + curl)
+- `verify-command-centre-lan-continuity.sh`: LAN-mode continuity proof (`0.0.0.0` bind + service installer contract checks)
 - `verify-udos-runtime-daemons.sh`: hostd / vaultd / syncd / **udos-commandd** / udos-web on ephemeral ports (health, `/host/*`, **commandd** `/v1/*`, local-state POST/GET)
+- `run-ubuntu-strict-completion-gate.sh`: strict completion gate runner (`run-ubuntu-checks` + HTTP + LAN continuity)
 - `runtime-spine-workspace-tui.sh`: TUI-style cycle through every repo in `cursor-01-runtime-spine.code-workspace`
 - `runtime-spine-round-proof.sh`: automated **steps [1/3][2/3]** only — HTTP verify + full workspace TUI; prints mandatory **step [3/3] final GUI render** instructions (see `uDOS-dev/docs/round-closure-three-steps.md`)
 - `linux-family-bootstrap.sh`: first-time Linux litmus — apt deps, clone runtime-spine siblings, pip extras, run round proof; **re-runs upgrade ubuntu + siblings, heal bad clones, refresh pip** (`docs/linux-first-run-quickstart.md`)
 - `demo-first-run-setup.sh`: emits the current Ubuntu first-run story
 - `demo-browser-workstation.sh`: emits the current command-centre/browser scaffold story
 - `udos-commandd.sh`: default **`serve`** runs the **HTTP listener** (`runtime_daemon_httpd.py commandd`); **`stub`** prints one-shot status; subcommands `list-operations`, `surface-summary`, `policy-summary`, `repo-op` unchanged
+- `udos_commandd.py`: Python CLI wrapper for `udos-commandd.sh` (same subcommands; non-breaking adapter for family shared-runtime migration)
 - `udos-gitd.sh`: bounded repo-store CLI and starter wrapper for host-side Git or GitHub actions
 - `udos-*.sh`: starter local service wrappers for the command-centre service set
 - `lib/runtime-layout.sh`: canonical `~/.udos/` directory layout (sourced from `udos-hostd.sh`)

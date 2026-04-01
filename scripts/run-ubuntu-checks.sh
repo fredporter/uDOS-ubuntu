@@ -76,6 +76,7 @@ require_file "$REPO_ROOT/scripts/serve-command-centre-demo.sh"
 require_file "$REPO_ROOT/scripts/lib/serve_static_http.py"
 require_file "$REPO_ROOT/scripts/lane1-runtime-proof-tui.sh"
 require_file "$REPO_ROOT/scripts/verify-command-centre-http.sh"
+require_file "$REPO_ROOT/scripts/verify-command-centre-lan-continuity.sh"
 require_file "$REPO_ROOT/scripts/lib/runtime_daemon_httpd.py"
 require_file "$REPO_ROOT/scripts/lib/human_readable_demo.py"
 require_file "$REPO_ROOT/scripts/verify-udos-runtime-daemons.sh"
@@ -84,6 +85,7 @@ require_file "$REPO_ROOT/scripts/runtime-spine-round-proof.sh"
 require_file "$REPO_ROOT/scripts/linux-family-bootstrap.sh"
 require_file "$REPO_ROOT/scripts/serve-command-centre-demo-lan.sh"
 require_file "$REPO_ROOT/scripts/install-command-centre-demo-lan-user-service.sh"
+require_file "$REPO_ROOT/scripts/run-ubuntu-strict-completion-gate.sh"
 require_file "$REPO_ROOT/scripts/README.md"
 require_file "$REPO_ROOT/scripts/demo-first-run-setup.sh"
 require_file "$REPO_ROOT/scripts/demo-browser-workstation.sh"
@@ -92,6 +94,7 @@ require_file "$REPO_ROOT/scripts/lib/runtime-layout.sh"
 require_file "$REPO_ROOT/scripts/lib/udos-web-listen.sh"
 require_file "$REPO_ROOT/scripts/udos-hostd.sh"
 require_file "$REPO_ROOT/scripts/udos-commandd.sh"
+require_file "$REPO_ROOT/scripts/udos_commandd.py"
 require_file "$REPO_ROOT/scripts/udos-vaultd.sh"
 require_file "$REPO_ROOT/scripts/udos-syncd.sh"
 require_file "$REPO_ROOT/scripts/udos-gitd.sh"
@@ -219,9 +222,13 @@ UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-gitd.sh" init-layout >
 UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-gitd.sh" repo-list >/dev/null
 UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-gitd.sh" >/dev/null
 UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-commandd.sh" list-operations repo >/dev/null
+UDOS_HOME="$TMP_HOME/.udos" "$REPO_ROOT/scripts/udos_commandd.py" list-operations repo >/dev/null
 UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-commandd.sh" surface-summary git >/dev/null
+UDOS_HOME="$TMP_HOME/.udos" "$REPO_ROOT/scripts/udos_commandd.py" surface-summary git >/dev/null
 UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-commandd.sh" policy-summary >/dev/null
+UDOS_HOME="$TMP_HOME/.udos" "$REPO_ROOT/scripts/udos_commandd.py" policy-summary >/dev/null
 UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-commandd.sh" repo-op repo.list >/dev/null
+UDOS_HOME="$TMP_HOME/.udos" "$REPO_ROOT/scripts/udos_commandd.py" repo-op repo.list >/dev/null
 repo_push_output="$(UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-commandd.sh" repo-op repo.push uDOS-ubuntu || true)"
 printf '%s' "$repo_push_output" | grep -q 'status=blocked'
 github_gate_output="$(UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-commandd.sh" repo-op github.pr.create uDOS-ubuntu || true)"

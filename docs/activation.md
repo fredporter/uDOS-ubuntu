@@ -6,6 +6,13 @@ Activate the first public base-image lane for the uDOS family with deterministic
 build surfaces, sonic-compatible install hooks, and an always-on command-centre
 setup direction.
 
+## Host vs browser operator (family vocabulary)
+
+**Ubuntu** owns the runtime host, command-centre HTTP surfaces, and `~/.udos/`
+materialisation per the runtime spine. The **Surface** browser app and **Wizard**
+broker in **`uDOS-wizard`** provide orchestration and operator UI; they do **not**
+replace host uptime authority. Shared GUI vocabulary: [`uDOS-dev/docs/gui-system-family-contract.md`](../../uDOS-dev/docs/gui-system-family-contract.md). Core delegation fields: [`uDOS-core/docs/wizard-surface-delegation-boundary.md`](../uDOS-core/docs/wizard-surface-delegation-boundary.md).
+
 ## Activated Surfaces
 
 - reproducible build lane under build/
@@ -26,6 +33,14 @@ bash scripts/verify-command-centre-http.sh
 
 The checks verify required repository surfaces, runtime daemon smoke, and the
 command-centre HTTP marker.
+
+For strict completion runs:
+
+```bash
+bash scripts/run-ubuntu-strict-completion-gate.sh
+```
+
+This gate composes repo checks, HTTP checks, and LAN continuity proof.
 
 ## GitHub Actions
 
