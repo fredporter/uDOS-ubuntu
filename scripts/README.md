@@ -1,6 +1,7 @@
 # Scripts
 
 - `run-ubuntu-checks.sh`: validates repository structure and starter artifacts (run as `bash scripts/run-ubuntu-checks.sh` from repo root, or `./run-ubuntu-checks.sh` from `scripts/` — not a bare filename unless `PATH` includes that directory)
+- `report-udos-disk-library.sh`: read-only JSON snapshot of `shutil.disk_usage` on `$HOME` and `du -sk` on `~/.udos/{library,cache,state,vault,logs,sync,tmp}` when those directories exist (`schema` `udos.ubuntu.wizard-family-health-disk.v1` on stdout). Used by **`uDOS-wizard`** `GET /family/health`; run as `bash scripts/report-udos-disk-library.sh` from this repo root
 - `serve-command-centre-demo.sh`: serves `examples/command-centre-demo/` using `UDOS_WEB_BIND` / `UDOS_WEB_PORT` (defaults in `scripts/lib/udos-web-listen.sh`; contract `contracts/udos-web/command-centre-static-demo.v1.json`)
 - `serve-command-centre-demo-lan.sh`: same demo bound to `0.0.0.0` for other machines on the LAN (`docs/lan-command-centre-persistent.md`)
 - `install-command-centre-demo-lan-user-service.sh`: installs `systemd --user` unit so the LAN demo survives SSH disconnect (`--now` / `--remove`)
