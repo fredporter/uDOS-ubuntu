@@ -219,6 +219,28 @@ cmd_repo_operation() {
       echo "adapter=${policy_adapter:-none}"
       echo "approval_env=${policy_approval_env:-none}"
       ;;
+    runtime.service.status)
+      target_service="${1:-all}"
+      log_audit_event "$operation_id" "ok" "lane1-status:${target_service}"
+      echo "status=ok"
+      echo "operation_id=$operation_id"
+      echo "target_service=$target_service"
+      echo "state=lane1-minimal"
+      echo "note=No centralized supervisor in lane1; per-daemon health probes are authoritative."
+      ;;
+    runtime.service.start|runtime.service.stop|runtime.service.restart)
+      target_service="${1:-}"
+      if [ -z "$target_service" ]; then
+        echo "missing target service for $operation_id" >&2
+        exit 1
+      fi
+      log_audit_event "$operation_id" "accepted" "lane1-lifecycle:${target_service}"
+      echo "status=accepted"
+      echo "operation_id=$operation_id"
+      echo "target_service=$target_service"
+      echo "mode=lane1-noop"
+      echo "note=Lifecycle command accepted in contract lane; concrete supervisor wiring is a later implementation step."
+      ;;
     *)
       echo "operation bridge not implemented for: $operation_id" >&2
       exit 1

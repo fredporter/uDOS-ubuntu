@@ -1,6 +1,6 @@
 # Linux first run — uDOS-ubuntu (public repo litmus)
 
-Use this when a machine has **never** had the uDOS family checked out. You clone **`uDOS-ubuntu` only** from the public Git host; one script pulls the **runtime-spine** sibling repos, installs common OS packages, adds minimal Python packages for Core tests, and runs **`runtime-spine-round-proof.sh`** (automated **[1/3][2/3]** only — you still owe **[3/3] browser GUI** per `uDOS-dev/docs/round-closure-three-steps.md`).
+Use this when a machine has **never** had the uDOS family checked out. You clone **`uDOS-ubuntu` only** from the public Git host; one script pulls the **runtime-spine** sibling repos (including **`uDOS-wizard`** for the Surface browser layer), installs common OS packages, adds minimal Python packages for Core tests, and runs **`runtime-spine-round-proof.sh`** (automated **[1/3][2/3]** only — you still owe **[3/3] browser GUI** per `uDOS-dev/docs/round-closure-three-steps.md`). **Host authority** for the spine stays with **Ubuntu** and `~/.udos/`; Wizard is orchestration and operator UI, not a second runtime spine (see `uDOS-dev/docs/gui-system-family-contract.md`).
 
 ## What you get
 

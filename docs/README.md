@@ -39,6 +39,7 @@ links) is authored in **`uDOS-docs`**:
 - [`uDOS-docs/docs/publishing-architecture.md`](../../uDOS-docs/docs/publishing-architecture.md)
 - [`uDOS-docs/docs/local-vs-github-docs-boundary.md`](../../uDOS-docs/docs/local-vs-github-docs-boundary.md)
 - [`uDOS-docs/docs/course-hooks-and-onboarding.md`](../../uDOS-docs/docs/course-hooks-and-onboarding.md)
+- [`uDOS-dev/docs/family-documentation-layout.md`](../../uDOS-dev/docs/family-documentation-layout.md) — `docs/` vs `@dev/` vs `wiki/` across the family
 
 Wiki units under `wiki/` are listed from `uDOS-docs` `site/data/family-source.json` when promoted to the learning hub.
 

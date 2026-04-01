@@ -55,6 +55,9 @@ and remote adapters, but not become the canonical repo-store owner.
 running on the host rather than host-owned Git or GitHub operations.
 `uHOME` should consume the runtime spine rather than redefine it.
 
+**Family GUI and broker vocabulary** (ThinUI vs browser vs Typo, Wizard vs host):
+[`uDOS-dev/docs/gui-system-family-contract.md`](../../uDOS-dev/docs/gui-system-family-contract.md).
+
 ## Failure Rule
 
 If Wizard is offline, Ubuntu-hosted local runtime surfaces must still support:

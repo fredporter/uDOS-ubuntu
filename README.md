@@ -1,9 +1,15 @@
 # uDOS-ubuntu
 
+**Product names:** this repo implements **uDOS-host** (local runtime host,
+`~/.udos/` materialisation, command-centre posture). When we mean an always-on /
+LAN deployment, we may say **uDOS-server** as the same stack, different profile.
+See **`uDOS-dev/docs/udos-host-platform-posture.md`** for OS support (Linux tier
+1, macOS tier 2, Windows scope).
+
 ## Purpose
 
-Canonical Ubuntu 22.04 LTS base image definition and always-on command-centre
-host lane for uDOS deployments.
+Canonical **Ubuntu 22.04 LTS** base image definition and reference host lane for
+uDOS deployments — the **primary implementation** of **uDOS-host** in git today.
 
 ## Ownership
 
