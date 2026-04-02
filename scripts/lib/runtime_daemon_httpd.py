@@ -405,12 +405,75 @@ class _JsonDaemonHandler(BaseHTTPRequestHandler):
         self.send_error(404, "Not found")
 
 
+def _thinui_status_surface_block() -> dict:
+    """Optional uDOS-surface profile hints for operators (env-driven)."""
+    extra: dict = {}
+    e = os.environ
+    pid = e.get("UDOS_SURFACE_PROFILE_ID", "").strip()
+    if pid:
+        extra["surface_profile_id"] = pid
+    repo = e.get("UDOS_SURFACE_REPO", "").strip()
+    if repo:
+        extra["surface_repo"] = repo
+    f = e.get("UDOS_SURFACE_PROFILE_FILE", "").strip()
+    summary: dict | None = None
+    if f:
+        p = Path(f).expanduser()
+        raw = _read_json_file(p)
+        if isinstance(raw, dict):
+            extra["surface_profile_file"] = str(p)
+            thin = raw.get("thinui")
+            theme = thin.get("theme") if isinstance(thin, dict) else None
+            summary = {
+                "id": raw.get("id"),
+                "layout": raw.get("layout"),
+                "navigation": raw.get("navigation"),
+                "theme": theme,
+            }
+    elif repo:
+        prof = pid or "ubuntu-gnome"
+        p = Path(repo).expanduser() / "profiles" / prof / "surface.json"
+        raw = _read_json_file(p)
+        if isinstance(raw, dict):
+            extra["surface_profile_file"] = str(p)
+            thin = raw.get("thinui")
+            theme = thin.get("theme") if isinstance(thin, dict) else None
+            summary = {
+                "id": raw.get("id"),
+                "layout": raw.get("layout"),
+                "navigation": raw.get("navigation"),
+                "theme": theme,
+            }
+    if summary:
+        extra["surface_profile_summary"] = summary
+    return extra
+
+
+class ThinuiHandler(_JsonDaemonHandler):
+    service_id = "udos-thinui"
+
+    def do_GET(self) -> None:
+        pth = urlparse(self.path).path
+        if pth == "/v1/status":
+            body = {
+                "service": "udos-thinui",
+                "status": "minimal",
+                "role": "thinui",
+                "udos_home": str(_udos_home()),
+                "port_env": "UDOS_THINUI_PORT",
+            }
+            body.update(_thinui_status_surface_block())
+            _send_json(self, 200, body)
+            return
+        super().do_GET()
+
+
 _AUX_HTTP_HANDLERS: Dict[str, type] = {
     "budgetd": _make_minimal_aux_handler("udos-budgetd", "budget", "UDOS_BUDGETD_PORT"),
     "networkd": _make_minimal_aux_handler("udos-networkd", "network", "UDOS_NETWORKD_PORT"),
     "scheduled": _make_minimal_aux_handler("udos-scheduled", "scheduled", "UDOS_SCHEDULED_PORT"),
     "tuid": _make_minimal_aux_handler("udos-tuid", "tui", "UDOS_TUID_PORT"),
-    "thinui": _make_minimal_aux_handler("udos-thinui", "thinui", "UDOS_THINUI_PORT"),
+    "thinui": ThinuiHandler,
     "wizard_adapter": _make_minimal_aux_handler(
         "udos-wizard-adapter", "wizard_adapter", "UDOS_WIZARD_ADAPTER_PORT"
     ),
