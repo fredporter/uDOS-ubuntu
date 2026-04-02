@@ -6,6 +6,12 @@ LAN deployment, we may say **uDOS-server** as the same stack, different profile.
 See **`uDOS-dev/docs/udos-host-platform-posture.md`** for OS support (Linux tier
 1, macOS tier 2, Windows scope).
 
+## Naming — do not conflate this repo with “GNOME design”
+
+- **This git repo** (folder name **`uDOS-ubuntu`** until renamed to **`uDOS-host`**) is the **runtime host implementation**: images, scripts, hooks, command-centre posture, disk layout — not a design-system home.
+- **Ubuntu** here means the **distro baseline** we build on, not “this repository equals Ubuntu Desktop as a product.”
+- **Classic Modern** and **de-modernised GNOME** posture are **specified** in **`uDOS-docs/docs/classic-modern-mvp-0.1/`** (host profile, tokens, brief). **`uDOS-themes`** and **`uDOS-thinui`** own tokens and primary surface; **this repo** applies host-side steps (tweaks, launch paths, scripts) that **follow** that pack. If you are doing **visual / token** work, start in the Classic Modern pack + themes + ThinUI — not only here.
+
 ## Purpose
 
 Canonical **Ubuntu 22.04 LTS** base image definition and reference host lane for
@@ -50,7 +56,7 @@ Keep image generation deterministic, scriptable, and portable for Sonic-driven d
 
 ## Family Relation
 
-uDOS-ubuntu is the target always-on runtime host for the family.
+This repository (**uDOS-host** implementation; legacy name **uDOS-ubuntu**) is the target always-on runtime host for the family.
 
 It should host the official base command centre:
 
