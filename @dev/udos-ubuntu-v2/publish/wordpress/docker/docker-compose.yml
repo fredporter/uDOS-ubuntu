@@ -1,3 +1,6 @@
+# transitional-compatibility: WordPress publish/demo only — not a tier-1 uDOS host service.
+# Owner + sunset: uDOS-ubuntu/docs/docker-compose-compatibility.md
+# Family registry: uDOS-dev/@dev/fixtures/shared-runtime-service-lifecycle.v1.json (ubuntu-wordpress-publish-stack)
 services:
   wordpress:
     image: wordpress:6.8-php8.3-apache

@@ -9,6 +9,7 @@
 - `verify-command-centre-http.sh`: automated localhost HTTP proof for the command-centre page (ephemeral port + curl)
 - `verify-command-centre-lan-continuity.sh`: LAN-mode continuity proof (`0.0.0.0` bind + service installer contract checks)
 - `verify-udos-runtime-daemons.sh`: hostd / vaultd / syncd / **udos-commandd** / udos-web on ephemeral ports (health, `/host/*`, **commandd** `/v1/*`, local-state POST/GET)
+- `verify-docker-compose-compatibility-doc.sh`: Post-08 **O3** — asserts `docs/docker-compose-compatibility.md` and the WordPress compose file carry **transitional-compatibility** markers (does not run Docker)
 - `run-ubuntu-strict-completion-gate.sh`: strict completion gate runner (`run-ubuntu-checks` + HTTP + LAN continuity)
 - `runtime-spine-workspace-tui.sh`: TUI-style cycle through every repo in `cursor-01-runtime-spine.code-workspace`
 - `runtime-spine-round-proof.sh`: automated **steps [1/3][2/3]** only — HTTP verify + full workspace TUI; prints mandatory **step [3/3] final GUI render** instructions (see `uDOS-dev/docs/round-closure-three-steps.md`)

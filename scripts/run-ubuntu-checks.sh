@@ -43,6 +43,8 @@ require_file "$REPO_ROOT/docs/systemd-unit-plan.md"
 require_file "$REPO_ROOT/docs/config-layout.md"
 require_file "$REPO_ROOT/docs/local-service-scaffold.md"
 require_file "$REPO_ROOT/docs/google-mvp-runtime-mode.md"
+require_file "$REPO_ROOT/docs/docker-compose-compatibility.md"
+require_file "$REPO_ROOT/scripts/verify-docker-compose-compatibility-doc.sh"
 require_file "$REPO_ROOT/contracts/README.md"
 require_file "$REPO_ROOT/contracts/udos-commandd/api-envelope.schema.json"
 require_file "$REPO_ROOT/contracts/udos-commandd/operation-registry.v1.json"
@@ -256,6 +258,7 @@ else
   fi
 fi
 
+bash "$REPO_ROOT/scripts/verify-docker-compose-compatibility-doc.sh"
 bash "$REPO_ROOT/scripts/verify-udos-runtime-daemons.sh"
 
 echo "uDOS-ubuntu checks passed"
