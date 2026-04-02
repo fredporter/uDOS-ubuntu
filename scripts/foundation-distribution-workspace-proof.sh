@@ -4,12 +4,12 @@
 # plugin-index, alpine, docs, dev). Completes Workspace 02 step 2 when used with step 1
 # (same script is the automated bundle — see round-proof wrapper).
 #
-# uDOS-ventoy: optional; if ../sonic-family/uDOS-ventoy is missing, a notice is
+# sonic-ventoy: optional; if ../sonic-family/sonic-ventoy is missing, a notice is
 # printed and the round still proceeds (Ventoy contract is exercised via Sonic tests).
 #
 # Environment (optional):
 #   SONIC_SCREWDRIVER_ROOT   default: $FAMILY_ROOT/../sonic-family/sonic-screwdriver
-#   UDOS_VENTOY_ROOT         default: $FAMILY_ROOT/../sonic-family/uDOS-ventoy
+#   UDOS_VENTOY_ROOT         default: $FAMILY_ROOT/../sonic-family/sonic-ventoy
 #
 # Usage (from uDOS-ubuntu):
 #   bash scripts/foundation-distribution-workspace-proof.sh
@@ -21,7 +21,7 @@ UBUNTU_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 FAMILY_ROOT="$(cd "$UBUNTU_ROOT/.." && pwd)"
 
 SONIC_ROOT="${SONIC_SCREWDRIVER_ROOT:-$FAMILY_ROOT/../sonic-family/sonic-screwdriver}"
-VENTOY_ROOT="${UDOS_VENTOY_ROOT:-$FAMILY_ROOT/../sonic-family/uDOS-ventoy}"
+VENTOY_ROOT="${UDOS_VENTOY_ROOT:-$FAMILY_ROOT/../sonic-family/sonic-ventoy}"
 CORE_ROOT="$FAMILY_ROOT/uDOS-core"
 PLUGIN_INDEX_ROOT="$FAMILY_ROOT/uDOS-plugin-index"
 ALPINE_ROOT="$FAMILY_ROOT/uDOS-alpine"
@@ -49,11 +49,11 @@ else
 fi
 
 if [ -d "$VENTOY_ROOT" ]; then
-  echo "[note] uDOS-ventoy present at $VENTOY_ROOT — no standalone check script in this round;"
+  echo "[note] sonic-ventoy present at $VENTOY_ROOT — no standalone check script in this round;"
   echo "       Sonic tests cover Ventoy integration smoke where applicable."
   echo ""
 else
-  echo "[note] uDOS-ventoy not checked out (optional for core lane); Sonic CI covers contract."
+  echo "[note] sonic-ventoy not checked out (optional for core lane); Sonic CI covers contract."
   echo ""
 fi
 

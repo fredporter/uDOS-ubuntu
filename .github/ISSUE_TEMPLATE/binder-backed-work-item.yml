@@ -17,8 +17,21 @@ body:
       label: Owning repo
       options:
         - uDOS-ubuntu
-        - uDOS-ventoy
+        - sonic-ventoy
         - sonic-screwdriver
-        - uDOS        - uDOS        - uDOS        - uDOS        - uDOS        - uDOS    ex        - uDOS        - uDOS        - uDOS        - uDOS     e
-        - uDOS        - uDOS        - uDOS        - uDOS        - uDOS        - uDOS    ex        - uDOS        - uDOS        - uDOS        - uDOS     e
-red: true
+        - uDOS-dev
+        - uDOS-core
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+    validations:
+      required: true
