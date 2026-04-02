@@ -70,6 +70,10 @@ def render_thinui(data: dict) -> str:
         lines.append(f"  Screen title: {data['title']}")
     if data.get("subtitle"):
         lines.append(f"  Tag line: {data['subtitle']}")
+    if sp := data.get("surfaceProfileId"):
+        lines.append(f"  Surface profile: {sp}")
+    if src := data.get("surfaceProfileSource"):
+        lines.append(f"  Profile contract: {src}")
     for label, key in (
         ("Runtime", "runtime"),
         ("Entry view", "entryView"),
@@ -79,6 +83,9 @@ def render_thinui(data: dict) -> str:
     ):
         if key in data and data[key] is not None:
             lines.append(f"  {label}: {data[key]}")
+    lines.append(
+        "  Input intents: uDOS-surface/profiles/<id>/input-mapping.json → Shell UCI (see uDOS-shell/docs/surface-input-and-uci.md)."
+    )
     return "\n".join(lines)
 
 
