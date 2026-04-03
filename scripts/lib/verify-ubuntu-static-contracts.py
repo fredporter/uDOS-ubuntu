@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Static contract checks for uDOS-ubuntu (extracted from run-ubuntu-checks.sh, OB-R4).
 
-Run from repository root (same cwd as ``run-ubuntu-checks.sh``).
+Required-file existence is enforced via ``ubuntu-check-required-files.v1.list``
+(shared with ``run-ubuntu-checks.sh``). Run from repository root (same cwd as
+``run-ubuntu-checks.sh``).
 """
 
 from __future__ import annotations
@@ -9,9 +11,26 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+MANIFEST_REL = Path("scripts/lib/ubuntu-check-required-files.v1.list")
+
+
+def require_manifest_files(repo_root: Path) -> None:
+    manifest = repo_root / MANIFEST_REL
+    if not manifest.is_file():
+        raise SystemExit(f"missing required manifest: {MANIFEST_REL}")
+    for raw in manifest.read_text(encoding="utf-8").splitlines():
+        stripped = raw.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        rel = Path(stripped)
+        path = repo_root / rel
+        if not path.is_file():
+            raise SystemExit(f"missing required file (manifest): {rel}")
+
 
 def main() -> None:
     repo_root = Path(".").resolve()
+    require_manifest_files(repo_root)
     packages = (repo_root / "config" / "packages.list").read_text(encoding="utf-8").splitlines()
     if not any(line.strip() and not line.startswith("#") for line in packages):
         raise SystemExit("config/packages.list must include at least one package entry")
