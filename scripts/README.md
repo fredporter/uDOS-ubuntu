@@ -1,6 +1,6 @@
 # Scripts
 
-- `run-ubuntu-checks.sh`: validates repository structure and starter artifacts (run as `bash scripts/run-ubuntu-checks.sh` from repo root, or `./run-ubuntu-checks.sh` from `scripts/` — not a bare filename unless `PATH` includes that directory)
+- `run-ubuntu-checks.sh`: validates repository structure and starter artifacts (run as `bash scripts/run-ubuntu-checks.sh` from repo root, or `./run-ubuntu-checks.sh` from `scripts/` — not a bare filename unless `PATH` includes that directory). Static **udos-commandd** / web / policy cross-checks live in **`lib/verify-ubuntu-static-contracts.py`** (invoked from this script; OB-R4 extraction).
 - `report-udos-disk-library.sh`: read-only JSON snapshot of `shutil.disk_usage` on `$HOME` and `du -sk` on `~/.udos/{library,cache,state,vault,logs,sync,tmp}` when those directories exist (`schema` `udos.ubuntu.wizard-family-health-disk.v1` on stdout). Used by **`uDOS-wizard`** `GET /family/health`; run as `bash scripts/report-udos-disk-library.sh` from this repo root
 - `serve-command-centre-demo.sh`: serves `examples/command-centre-demo/` using `UDOS_WEB_BIND` / `UDOS_WEB_PORT` (defaults in `scripts/lib/udos-web-listen.sh`; contract `contracts/udos-web/command-centre-static-demo.v1.json`)
 - `serve-command-centre-demo-lan.sh`: same demo bound to `0.0.0.0` for other machines on the LAN (`docs/lan-command-centre-persistent.md`)
@@ -20,5 +20,6 @@
 - `udos_commandd.py`: Python CLI wrapper for `udos-commandd.sh` (same subcommands; non-breaking adapter for family shared-runtime migration)
 - `udos-gitd.sh`: bounded repo-store CLI and starter wrapper for host-side Git or GitHub actions
 - `udos-*.sh`: starter local service wrappers for the command-centre service set
+- `lib/verify-ubuntu-static-contracts.py`: JSON/YAML consistency checks for **udos-commandd** contracts, web demo defaults, and policy examples (run from repo root; used by `run-ubuntu-checks.sh`)
 - `lib/runtime-layout.sh`: canonical `~/.udos/` directory layout (sourced from `udos-hostd.sh`)
 - `lib/human_readable_demo.py`: turns `examples/*-scaffold.json` / ThinUI launch JSON into **operator-facing terminal prose** (used by `demo-first-run-setup.sh`, `demo-browser-workstation.sh`, and workspace TUI). Demos default to readable text; set **`UDOS_DEMO_INCLUDE_RAW_JSON=1`** to also print raw JSON.
