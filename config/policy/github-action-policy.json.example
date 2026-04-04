@@ -1,7 +1,7 @@
 {
   "version": "v1",
   "policy_id": "ubuntu-github-action-policy",
-  "owner": "uDOS-ubuntu",
+  "owner": "uDOS-host",
   "default_mode": "manual-approval",
   "audit_log": "~/.udos/logs/commandd/github-action-audit.log",
   "repo_rules": {

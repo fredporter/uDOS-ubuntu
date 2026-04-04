@@ -1,4 +1,4 @@
-# Base package profile for uDOS-ubuntu
+# Base package profile for uDOS-host
 ubuntu-minimal
 cloud-init
 curl
