@@ -1,4 +1,4 @@
-# uDOS-ubuntu Boundary
+# uDOS-host Boundary
 
 ## Owns
 

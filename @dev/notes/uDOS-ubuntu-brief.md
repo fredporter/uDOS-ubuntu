@@ -1,4 +1,4 @@
-uDOS-ubuntu
+uDOS-host
 
 uDOS v2 — Base OS Distribution & Boot System
 
@@ -6,7 +6,7 @@ uDOS v2 — Base OS Distribution & Boot System
 
 Purpose
 
-uDOS-ubuntu defines the canonical base operating system layer for uDOS v2 deployments.
+uDOS-host defines the canonical base operating system layer for uDOS v2 deployments.
 
 It provides:
 	•	a minimal, reproducible Ubuntu 22 LTS base image
@@ -83,7 +83,7 @@ Owns:
 
 High-Level Architecture
 
-uDOS-ubuntu
+uDOS-host
 ├── build/
 │   ├── iso/
 │   ├── rootfs/
@@ -183,7 +183,7 @@ Sonic-Screwdriver Integration
 Role
 
 sonic-screwdriver must be able to:
-	1.	Download latest uDOS-ubuntu build
+	1.	Download latest uDOS-host build
 	2.	Prepare USB (sonic-stick)
 	3.	Install boot system
 	4.	Inject config (user/device specific)
@@ -404,7 +404,7 @@ Future Extensions
 
 Summary
 
-uDOS-ubuntu is the foundation layer.
+uDOS-host is the foundation layer.
 
 It provides:
 	•	a clean, reproducible OS

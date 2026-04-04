@@ -1,6 +1,6 @@
 # Ubuntu Wiki
 
-`/wiki` is the learning lane for `uDOS-ubuntu`.
+`/wiki` is the learning lane for `uDOS-host`.
 
 Use it for:
 

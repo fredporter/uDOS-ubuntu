@@ -105,3 +105,10 @@ config/runtime/runtime.yaml.example
 config/runtime/git-repos.yaml.example
 config/network/network.yaml.example
 config/publish/publish.yaml.example
+services/gpt-export-helper/README.md
+services/gpt-export-helper/package.json
+services/gpt-export-helper/server.js
+services/gpt-export-helper/ngrok-setup.md
+services/gpt-export-helper/.env.example
+services/gpt-export-helper/scripts/cleanup-exports.sh
+services/gpt-export-helper/systemd/udos-gpt-export-helper.service

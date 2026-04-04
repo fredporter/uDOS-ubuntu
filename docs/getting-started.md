@@ -18,7 +18,7 @@ This validates required repository surfaces and template assets.
 
 ## First-time Linux (public repo, full family litmus)
 
-If this is a **fresh Linux machine** and you are cloning **`uDOS-ubuntu`** from GitHub (or similar) for the first time, use:
+If this is a **fresh Linux machine** and you are cloning **`uDOS-host`** from GitHub (or similar) for the first time, use:
 
 - **`docs/linux-first-run-quickstart.md`** — step-by-step and one-liner clone + bootstrap.
 - **`scripts/linux-family-bootstrap.sh`** — installs common packages, clones `cursor-01` sibling repos, runs **`runtime-spine-round-proof.sh`**.

@@ -1,4 +1,4 @@
-# uDOS-ubuntu v2.2 Package
+# uDOS-host v2.2 Package
 
 This package defines the Ubuntu-owned server runtime for uDOS.
 
@@ -7,7 +7,7 @@ control plane for provider routing, beacon runtime, or MCP bridge ownership.
 
 ## Position
 
-uDOS-ubuntu owns:
+uDOS-host owns:
 
 - local network setup and config
 - beacon node behavior

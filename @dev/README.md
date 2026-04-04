@@ -1,6 +1,6 @@
 # Ubuntu Dev Workspace
 
-`/@dev` is the compact public planning lane for `uDOS-ubuntu`.
+`/@dev` is the compact public planning lane for `uDOS-host`.
 
 Use it for:
 

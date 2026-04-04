@@ -1,6 +1,6 @@
 # Completed Submission Summary
 
-This is the compact completed summary for `uDOS-ubuntu`.
+This is the compact completed summary for `uDOS-host`.
 
 ## Completed Families Of Work
 

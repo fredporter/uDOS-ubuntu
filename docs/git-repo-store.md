@@ -1,11 +1,11 @@
-# uDOS-ubuntu Git Repo Store
+# uDOS-host Git Repo Store
 
 This document defines the first-pass host contract for family repository
-storage and Git or GitHub execution on `uDOS-ubuntu`.
+storage and Git or GitHub execution on `uDOS-host`.
 
 ## Purpose
 
-`uDOS-ubuntu` is the coordinated central local repo store for the family.
+`uDOS-host` is the coordinated central local repo store for the family.
 
 That means Ubuntu owns:
 

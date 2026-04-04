@@ -1,6 +1,6 @@
 # Contracts
 
-Machine-readable command-centre contracts for `uDOS-ubuntu`.
+Machine-readable command-centre contracts for `uDOS-host`.
 
 These files mirror the active Workspace 01 planning docs and exist so Cursor
 handover can move directly into implementation without reinterpreting the prose

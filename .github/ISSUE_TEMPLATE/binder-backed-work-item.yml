@@ -16,7 +16,7 @@ body:
     attributes:
       label: Owning repo
       options:
-        - uDOS-ubuntu
+        - uDOS-host
         - sonic-ventoy
         - sonic-screwdriver
         - uDOS-dev

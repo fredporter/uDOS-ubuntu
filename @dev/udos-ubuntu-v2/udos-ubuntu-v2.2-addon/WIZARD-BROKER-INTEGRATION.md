@@ -33,17 +33,17 @@ Keep:
 
 ## Suggested Broker Capability Mapping
 
-- `format_doc` -> `uDOS-ubuntu/services/okd`
-- `ingest_link` -> `uDOS-ubuntu/services/okd`
-- `research_topic` -> `uDOS-ubuntu/services/okd`
-- `library_browse` -> `uDOS-ubuntu/library`
-- `beacon_status` -> `uDOS-ubuntu/network/beacon`
+- `format_doc` -> `uDOS-host/services/okd`
+- `ingest_link` -> `uDOS-host/services/okd`
+- `research_topic` -> `uDOS-host/services/okd`
+- `library_browse` -> `uDOS-host/library`
+- `beacon_status` -> `uDOS-host/network/beacon`
 
 ## Suggested Envelope Target
 
 ```json
 {
-  "destination_service": "uDOS-ubuntu",
+  "destination_service": "uDOS-host",
   "destination_surface": "services/okd",
   "capability": "ok.transformation",
   "dispatch_mode": "direct"

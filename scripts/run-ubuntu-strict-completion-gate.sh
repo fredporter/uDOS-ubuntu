@@ -11,4 +11,4 @@ bash "$REPO_ROOT/scripts/run-ubuntu-checks.sh"
 bash "$REPO_ROOT/scripts/verify-command-centre-http.sh"
 bash "$REPO_ROOT/scripts/verify-command-centre-lan-continuity.sh"
 
-echo "uDOS-ubuntu strict completion gate passed"
+echo "uDOS-host strict completion gate passed"

@@ -32,12 +32,12 @@ OS- `exam ide
 Keep image generatboo
 ## Family Relation
 
-uDOS-ubuntu is t# uDOS-ubuntu
+uDOS-host is t# uDOS-host
 
 ## Purpose
 
 Canonical Ubuntu 22.0tal
-uDOS-ubuntu is tnd 
+uDOS-host is tnd 
 ## Purpose
 
 Canonical Ubuntoni
@@ -52,5 +52,5 @@ Canonicaive
 
 ## Boundary Rule
 
-uDOS-ubuntu owns base OS composition and compatibility hooks. It does not own
+uDOS-host owns base OS composition and compatibility hooks. It does not own
 runtime contracts, provider control surfaces, or cross-repo semantic policy.

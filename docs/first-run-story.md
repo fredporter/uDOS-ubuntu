@@ -1,6 +1,6 @@
 # Ubuntu First-Run Story
 
-This is the intended first-run setup story for the current `uDOS-ubuntu` lane.
+This is the intended first-run setup story for the current `uDOS-host` lane.
 
 ## Sequence
 
@@ -33,7 +33,7 @@ bash scripts/demo-browser-workstation.sh
 
 ## Lane 1 closure proof (runtime spine)
 
-**Terminal (Core + Grid + Ubuntu):** from `uDOS-ubuntu`, with `uDOS-core` and
+**Terminal (Core + Grid + Ubuntu):** from `uDOS-host`, with `uDOS-core` and
 `uDOS-grid` as sibling repos:
 
 ```bash

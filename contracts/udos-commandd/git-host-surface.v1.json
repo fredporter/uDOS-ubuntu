@@ -1,7 +1,7 @@
 {
   "version": "v1",
   "surface_id": "ubuntu-git-host-surface",
-  "owner": "uDOS-ubuntu",
+  "owner": "uDOS-host",
   "consumer": "family",
   "purpose": "Expose Ubuntu-owned local repo-store and Git or GitHub execution operations without making Empire or Wizard the canonical host owner.",
   "base_path": "/repos",

@@ -1,4 +1,4 @@
-# uDOS-ubuntu Config Layout
+# uDOS-host Config Layout
 
 This document defines the intended checked-in config structure for the Ubuntu
 command-centre host.
@@ -13,7 +13,7 @@ It separates:
 
 ## 1. Checked-In Repo Config
 
-The repo should own non-secret templates and defaults under `uDOS-ubuntu/config/`.
+The repo should own non-secret templates and defaults under `uDOS-host/config/`.
 
 Target layout:
 

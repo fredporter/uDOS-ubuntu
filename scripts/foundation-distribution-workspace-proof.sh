@@ -11,7 +11,7 @@
 #   SONIC_SCREWDRIVER_ROOT   default: $FAMILY_ROOT/../sonic-family/sonic-screwdriver
 #   UDOS_VENTOY_ROOT         default: $FAMILY_ROOT/../sonic-family/sonic-ventoy
 #
-# Usage (from uDOS-ubuntu):
+# Usage (from uDOS-host):
 #   bash scripts/foundation-distribution-workspace-proof.sh
 
 set -eu
@@ -57,11 +57,11 @@ else
   echo ""
 fi
 
-run_phase "uDOS-ubuntu: run-ubuntu-checks.sh"
+run_phase "uDOS-host: run-ubuntu-checks.sh"
 bash "$SCRIPT_DIR/run-ubuntu-checks.sh"
 echo ""
 
-run_phase "uDOS-ubuntu: verify-command-centre-http.sh"
+run_phase "uDOS-host: verify-command-centre-http.sh"
 bash "$SCRIPT_DIR/verify-command-centre-http.sh"
 echo ""
 

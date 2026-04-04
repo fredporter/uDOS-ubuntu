@@ -48,7 +48,7 @@ mkdir -p "$LOG_DIR"
 echo "$(date -u +"%Y-%m-%dT%H:%M:%SZ") start bind=$UDOS_WEB_BIND port=$UDOS_WEB_PORT root=$DEMO_DIR contract=udos-web/command-centre-static-demo.v1.json" >>"$LOG_DIR/http.log"
 
 BASE_URL="$(udos_web_base_url)"
-echo "[uDOS-ubuntu] Command-centre static demo (v2 web protocol)"
+echo "[uDOS-host] Command-centre static demo (v2 web protocol)"
 echo "  contract: $REPO_ROOT/contracts/udos-web/command-centre-static-demo.v1.json"
 echo "  open:     $BASE_URL  (localhost works on same host when bind is loopback)"
 if [ "$UDOS_WEB_BIND" = "0.0.0.0" ]; then

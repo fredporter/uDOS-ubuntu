@@ -1,10 +1,10 @@
-# uDOS-ubuntu v2.2
+# uDOS-host v2.2
 
 ## Network Server + Local WordPress + OK + MCP Specification
 
 ## 1. Purpose
 
-uDOS-ubuntu is the always-on server node for uDOS.
+uDOS-host is the always-on server node for uDOS.
 
 It provides:
 
@@ -86,7 +86,7 @@ Primary roles:
 
 Canonical flow:
 
-`vault md/mdc -> compile/normalize in uDOS-ubuntu -> publish package -> WordPress ingest/runtime adapter -> local site/library/page delivery`
+`vault md/mdc -> compile/normalize in uDOS-host -> publish package -> WordPress ingest/runtime adapter -> local site/library/page delivery`
 
 ### Publish Modes
 
@@ -125,7 +125,7 @@ Beacon becomes an Ubuntu server network mode.
 
 ### 5.1 Beacon Definition
 
-A Beacon node is a uDOS-ubuntu server that can expose a local Wi-Fi or LAN
+A Beacon node is a uDOS-host server that can expose a local Wi-Fi or LAN
 access surface and serve:
 
 - its local WordPress portal
@@ -532,7 +532,7 @@ This architecture is satisfied when:
 
 ## Short-Form Decision
 
-uDOS-ubuntu is the always-on local network server for uDOS. It hosts Dockerized
+uDOS-host is the always-on local network server for uDOS. It hosts Dockerized
 localhost WordPress as the vault publishing shell, serves the markdown library
 to nearby devices, owns beacon and network configuration, and provides the
 managed OK and MCP execution fabric with offline-first routing, cache,

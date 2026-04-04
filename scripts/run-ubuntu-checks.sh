@@ -65,9 +65,9 @@ UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-commandd.sh" policy-su
 UDOS_HOME="$TMP_HOME/.udos" "$REPO_ROOT/scripts/udos_commandd.py" policy-summary >/dev/null
 UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-commandd.sh" repo-op repo.list >/dev/null
 UDOS_HOME="$TMP_HOME/.udos" "$REPO_ROOT/scripts/udos_commandd.py" repo-op repo.list >/dev/null
-repo_push_output="$(UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-commandd.sh" repo-op repo.push uDOS-ubuntu || true)"
+repo_push_output="$(UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-commandd.sh" repo-op repo.push uDOS-host || true)"
 printf '%s' "$repo_push_output" | grep -q 'status=blocked'
-github_gate_output="$(UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-commandd.sh" repo-op github.pr.create uDOS-ubuntu || true)"
+github_gate_output="$(UDOS_HOME="$TMP_HOME/.udos" bash "$REPO_ROOT/scripts/udos-commandd.sh" repo-op github.pr.create uDOS-host || true)"
 printf '%s' "$github_gate_output" | grep -q 'status=policy-gated'
 
 if command -v rg >/dev/null 2>&1; then
@@ -77,7 +77,7 @@ if command -v rg >/dev/null 2>&1; then
     "$REPO_ROOT/docs" \
     "$REPO_ROOT/examples" \
     "$REPO_ROOT/config"; then
-    echo "private local-root reference found in uDOS-ubuntu" >&2
+    echo "private local-root reference found in uDOS-host" >&2
     exit 1
   fi
 else
@@ -86,7 +86,7 @@ else
     "$REPO_ROOT/docs" \
     "$REPO_ROOT/examples" \
     "$REPO_ROOT/config"; then
-    echo "private local-root reference found in uDOS-ubuntu" >&2
+    echo "private local-root reference found in uDOS-host" >&2
     exit 1
   fi
 fi
@@ -94,4 +94,4 @@ fi
 bash "$REPO_ROOT/scripts/verify-docker-compose-compatibility-doc.sh"
 bash "$REPO_ROOT/scripts/verify-udos-runtime-daemons.sh"
 
-echo "uDOS-ubuntu checks passed"
+echo "uDOS-host checks passed"

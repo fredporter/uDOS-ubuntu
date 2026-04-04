@@ -1,7 +1,7 @@
 # Docker Compose compatibility (Ubuntu repo)
 
 Status: **reference**  
-Owner: **`uDOS-ubuntu`** (publish/demo material under `@dev/`)
+Owner: **`uDOS-host`** (publish/demo material under `@dev/`)
 
 ## Role
 

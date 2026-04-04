@@ -1,6 +1,6 @@
-# uDOS-ubuntu Architecture
+# uDOS-host Architecture
 
-uDOS-ubuntu is the reproducible Ubuntu image-definition and always-on runtime
+uDOS-host is the reproducible Ubuntu image-definition and always-on runtime
 host repo for the family command centre. It is still not a distro fork.
 
 ## Main Areas
@@ -39,7 +39,7 @@ Ubuntu is the intended host for:
 
 ## Boundary Rule
 
-uDOS-ubuntu owns base OS composition, command-centre hosting, and runtime host
+uDOS-host owns base OS composition, command-centre hosting, and runtime host
 assembly.
 
 It now also owns the coordinated local repo store plus host execution of Git

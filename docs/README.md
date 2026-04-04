@@ -1,6 +1,6 @@
 # Ubuntu Docs
 
-`/docs` is the stable reference lane for `uDOS-ubuntu`.
+`/docs` is the stable reference lane for `uDOS-host`.
 
 Use it for:
 

@@ -66,7 +66,7 @@ def _ubuntu_repo_root() -> Path:
     env = os.environ.get("UDOS_UBUNTU_ROOT", "").strip()
     if env:
         return Path(env).expanduser().resolve()
-    # This file: uDOS-ubuntu/scripts/lib/runtime_daemon_httpd.py
+    # This file: uDOS-host/scripts/lib/runtime_daemon_httpd.py
     return Path(__file__).resolve().parent.parent.parent
 
 

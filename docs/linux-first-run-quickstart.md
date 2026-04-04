@@ -1,10 +1,10 @@
-# Linux first run — uDOS-ubuntu (public repo litmus)
+# Linux first run — uDOS-host (public repo litmus)
 
-Use this when a machine has **never** had the uDOS family checked out. You clone **`uDOS-ubuntu` only** from the public Git host; one script pulls the **runtime-spine** sibling repos (including **`uDOS-wizard`** for the Surface browser layer), installs common OS packages, adds minimal Python packages for Core tests, and runs **`runtime-spine-round-proof.sh`** (automated **[1/3][2/3]** only — you still owe **[3/3] browser GUI** per `uDOS-dev/docs/round-closure-three-steps.md`). **Host authority** for the spine stays with **Ubuntu** and `~/.udos/`; Wizard is orchestration and operator UI, not a second runtime spine (see `uDOS-dev/docs/gui-system-family-contract.md`).
+Use this when a machine has **never** had the uDOS family checked out. You clone **`uDOS-host` only** from the public Git host; one script pulls the **runtime-spine** sibling repos (including **`uDOS-wizard`** for the Surface browser layer), installs common OS packages, adds minimal Python packages for Core tests, and runs **`runtime-spine-round-proof.sh`** (automated **[1/3][2/3]** only — you still owe **[3/3] browser GUI** per `uDOS-dev/docs/round-closure-three-steps.md`). **Host authority** for the spine stays with **Ubuntu** and `~/.udos/`; Wizard is orchestration and operator UI, not a second runtime spine (see `uDOS-dev/docs/gui-system-family-contract.md`).
 
 ## What you get
 
-- Siblings next to `uDOS-ubuntu`: `uDOS-core`, `uDOS-grid`, `uDOS-wizard`, `uDOS-dev`, `uDOS-docs` (same layout as `cursor-01-runtime-spine.code-workspace`).
+- Siblings next to `uDOS-host`: `uDOS-core`, `uDOS-grid`, `uDOS-wizard`, `uDOS-dev`, `uDOS-docs` (same layout as `cursor-01-runtime-spine.code-workspace`).
 - **Debian/Ubuntu:** `apt-get install` for `git`, `curl`, `ca-certificates`, `python3`, `python3-venv`, `python3-pip`, `nodejs`, `npm`, and **`python3.11`** when the package exists (helps **uDOS-wizard** checks).
 - **pip (user):** `pytest`, `jsonschema`, `referencing` if `pytest` is missing (for **uDOS-core**).
 - **Verification:** **`scripts/runtime-spine-round-proof.sh`** completes automated **[1/3][2/3]** (must pass). **Step [3/3] — final GUI render** in a real browser is still **mandatory** to close Workspace 01; see **`uDOS-dev/docs/round-closure-three-steps.md`**.
@@ -21,12 +21,12 @@ Use this when a machine has **never** had the uDOS family checked out. You clone
 Replace `<ORG>` with your GitHub org or user (or your full base URL logic).
 
 ```bash
-git clone --depth 1 https://github.com/<ORG>/uDOS-ubuntu.git
-cd uDOS-ubuntu
+git clone --depth 1 https://github.com/<ORG>/uDOS-host.git
+cd uDOS-host
 bash scripts/linux-family-bootstrap.sh
 ```
 
-The script discovers **`UDOS_FAMILY_GIT_BASE`** from **`git remote get-url origin`** (e.g. `https://github.com/<ORG>/uDOS-ubuntu.git` → `https://github.com/<ORG>`). If that fails (no remote), set it explicitly:
+The script discovers **`UDOS_FAMILY_GIT_BASE`** from **`git remote get-url origin`** (e.g. `https://github.com/<ORG>/uDOS-host.git` → `https://github.com/<ORG>`). If that fails (no remote), set it explicitly:
 
 ```bash
 export UDOS_FAMILY_GIT_BASE=https://github.com/<ORG>
@@ -44,20 +44,20 @@ bash scripts/linux-family-bootstrap.sh
 
 ### Custom layout
 
-By default, siblings are cloned into the **parent** of `uDOS-ubuntu`. To use another directory:
+By default, siblings are cloned into the **parent** of `uDOS-host`. To use another directory:
 
 ```bash
 export UDOS_FAMILY_ROOT="$HOME/src/uDOS-family"
 mkdir -p "$UDOS_FAMILY_ROOT"
 cd "$UDOS_FAMILY_ROOT"
-git clone --depth 1 https://github.com/<ORG>/uDOS-ubuntu.git
-cd uDOS-ubuntu
+git clone --depth 1 https://github.com/<ORG>/uDOS-host.git
+cd uDOS-host
 bash scripts/linux-family-bootstrap.sh
 ```
 
 ## After bootstrap succeeds
 
-**Invoking scripts:** use `bash scripts/<name>.sh` from the `uDOS-ubuntu` root, or `cd scripts && ./<name>.sh`. A bare `<name>.sh` will not resolve unless that directory is on your `PATH`.
+**Invoking scripts:** use `bash scripts/<name>.sh` from the `uDOS-host` root, or `cd scripts && ./<name>.sh`. A bare `<name>.sh` will not resolve unless that directory is on your `PATH`.
 
 **After bootstrap:** you still owe **step [3/3]** — open the command-centre in a **browser** and record sign-off (`uDOS-dev/docs/round-closure-three-steps.md`).
 
@@ -86,13 +86,13 @@ bash scripts/linux-family-bootstrap.sh
 The same command **updates** the install:
 
 ```bash
-cd uDOS-ubuntu
+cd uDOS-host
 bash scripts/linux-family-bootstrap.sh
 ```
 
 By default it will:
 
-- **`git fetch` / fast-forward** this **`uDOS-ubuntu`** repo to **`origin/$UDOS_FAMILY_BRANCH`** (default `main`). If new commits land, the script **re-invokes itself once** so you always run the **latest** `linux-family-bootstrap.sh` from the repo.
+- **`git fetch` / fast-forward** this **`uDOS-host`** repo to **`origin/$UDOS_FAMILY_BRANCH`** (default `main`). If new commits land, the script **re-invokes itself once** so you always run the **latest** `linux-family-bootstrap.sh` from the repo.
 - **Pull** sibling repos (`uDOS-core`, `uDOS-grid`, …) with **fast-forward** only.
 - **Heal** broken sibling trees: empty folder, missing `.git`, or corrupt git → **remove and re-clone** (with retries).
 - **Refresh** bootstrap pip packages (`pytest`, `jsonschema`, `referencing`) with **`-U`**.
@@ -104,7 +104,7 @@ export UDOS_BOOTSTRAP_RESET_HARD=1
 bash scripts/linux-family-bootstrap.sh
 ```
 
-That resets **`uDOS-ubuntu`** and each sibling (when pull fails) to **`origin/$BRANCH`**. Use only when you accept losing local diffs.
+That resets **`uDOS-host`** and each sibling (when pull fails) to **`origin/$BRANCH`**. Use only when you accept losing local diffs.
 
 Optional OS package upgrades:
 
@@ -119,7 +119,7 @@ bash scripts/linux-family-bootstrap.sh
 | --- | --- |
 | `UDOS_SKIP_APT=1` | Do not run `apt-get` (you installed deps yourself). |
 | `UDOS_SKIP_ROUND_PROOF=1` | Only clone + pip prep; skip the long proof (then run it manually). |
-| `UDOS_SKIP_SELF_UPGRADE=1` | Do not pull or re-exec **`uDOS-ubuntu`** (frozen tree). |
+| `UDOS_SKIP_SELF_UPGRADE=1` | Do not pull or re-exec **`uDOS-host`** (frozen tree). |
 | `UDOS_SKIP_SIBLING_UPGRADE=1` | Do not `git pull` siblings (still heal missing/corrupt clones). |
 | `UDOS_SKIP_PIP_UPGRADE=1` | Only install pip deps if missing (no `-U`). |
 | `UDOS_APT_UPGRADE=1` | After `apt-get install`, run **`apt-get upgrade -y`**. |
@@ -152,4 +152,4 @@ When this litmus passes on your Linux host, **Workspace 01 (runtime spine)** is 
 
 Canonical pathway notes: `uDOS-dev/@dev/pathways/runtime-spine-workspace-round-closure.md`.
 
-**Workspace 02 (foundation / distribution):** read **`uDOS-dev/docs/foundation-distribution.md`** for Sonic-first install order, `~/.udos/` ownership, and the Sonic/Ventoy split. After cloning **Sonic** (adjacent family root) and any extra siblings that workspace lists, run **`bash scripts/foundation-distribution-workspace-proof.sh`** from **`uDOS-ubuntu`** for the full lane-2 automated gate (still complete **step 3 — browser** on the command-centre demo per `uDOS-dev/docs/round-closure-three-steps.md`). Pathway: **`uDOS-dev/@dev/pathways/foundation-distribution-workspace-round-closure.md`**.
+**Workspace 02 (foundation / distribution):** read **`uDOS-dev/docs/foundation-distribution.md`** for Sonic-first install order, `~/.udos/` ownership, and the Sonic/Ventoy split. After cloning **Sonic** (adjacent family root) and any extra siblings that workspace lists, run **`bash scripts/foundation-distribution-workspace-proof.sh`** from **`uDOS-host`** for the full lane-2 automated gate (still complete **step 3 — browser** on the command-centre demo per `uDOS-dev/docs/round-closure-three-steps.md`). Pathway: **`uDOS-dev/@dev/pathways/foundation-distribution-workspace-round-closure.md`**.

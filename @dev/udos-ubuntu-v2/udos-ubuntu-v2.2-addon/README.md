@@ -1,6 +1,6 @@
-# uDOS-ubuntu v2.2 add-on scaffold
+# uDOS-host v2.2 add-on scaffold
 
-This add-on package is designed to be merged into the prior `uDOS-ubuntu-v2.2` scaffold.
+This add-on package is designed to be merged into the prior `uDOS-host-v2.2` scaffold.
 
 Included:
 

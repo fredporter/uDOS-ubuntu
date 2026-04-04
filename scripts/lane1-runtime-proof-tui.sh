@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Terminal proof for lane 1: uDOS-core (pytest) + uDOS-grid (checks + unittest).
-# Run from uDOS-ubuntu with sibling repos: uDOS-core, uDOS-grid.
+# Run from uDOS-host with sibling repos: uDOS-core, uDOS-grid.
 
 set -eu
 
@@ -43,7 +43,7 @@ rule
 
 echo ""
 rule
-bold "3) uDOS-ubuntu — structure + layout + commandd/gitd"
+bold "3) uDOS-host — structure + layout + commandd/gitd"
 rule
 ( cd "$UBUNTU_ROOT" && bash scripts/run-ubuntu-checks.sh )
 

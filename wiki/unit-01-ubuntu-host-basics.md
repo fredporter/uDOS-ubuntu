@@ -1,6 +1,6 @@
 # Unit 01: Ubuntu Host Basics
 
-This unit introduces `uDOS-ubuntu` as the always-on host for the family.
+This unit introduces `uDOS-host` as the always-on host for the family.
 
 ## Learn This First
 

@@ -15,7 +15,7 @@
 #   ROUND_PAUSE_SEC   seconds between phases (default 1)
 #   SKIP_WIZARD=1     skip uDOS-wizard (faster smoke; not for full round closure)
 #
-# Usage (from uDOS-ubuntu):
+# Usage (from uDOS-host):
 #   bash scripts/runtime-spine-workspace-tui.sh
 
 set -eu
@@ -106,7 +106,7 @@ print_operator_narrative_recap() {
   echo "  • Phase 0 — The static command-centre page is served over HTTP and contains the expected title text"
   echo "    (automated curl; not a substitute for opening a real browser — that is step [3/3])."
   echo "  • Phase 1 — uDOS-core contracts, enforcement gates, and the green_proof test slice all passed."
-  echo "  • Phase 2 — uDOS-ubuntu layout + lane-1 daemons + checks passed; you saw readable workstation/ThinUI"
+  echo "  • Phase 2 — uDOS-host layout + lane-1 daemons + checks passed; you saw readable workstation/ThinUI"
   echo "    intent and live repo-operation rows from commandd (not just JSON dumps)."
   echo "${WIZARD_RECAP_MSG:-  • Phase 3 — uDOS-wizard: not summarized.}"
   echo "  • Phase 4 — uDOS-grid spatial contracts and checks passed."
@@ -201,7 +201,7 @@ print_legend
 
 require_repo "$CORE_ROOT" "uDOS-core"
 require_repo "$GRID_ROOT" "uDOS-grid"
-require_repo "$UBUNTU_ROOT" "uDOS-ubuntu"
+require_repo "$UBUNTU_ROOT" "uDOS-host"
 require_repo "$WIZARD_ROOT" "uDOS-wizard"
 require_repo "$DEV_ROOT" "uDOS-dev"
 require_repo "$DOCS_ROOT" "uDOS-docs"
@@ -236,10 +236,10 @@ feature working "pytest -m green_proof — lane-1 contract slice (feeds/spool et
 ok "  Phase 1 complete."
 pause_phase
 
-# --- uDOS-ubuntu ---
+# --- uDOS-host ---
 CURRENT_PHASE="P2 Ubuntu"
 rule
-bold "Phase 2 — uDOS-ubuntu (host spine + commandd/gitd)"
+bold "Phase 2 — uDOS-host (host spine + commandd/gitd)"
 rule
 feature scaffold "run-ubuntu-checks.sh — file/contract gates + layout + verify-udos-runtime-daemons (all lane-1 HTTP daemons incl. commandd + aux); deeper product semantics still open"
 ( cd "$UBUNTU_ROOT" && bash scripts/run-ubuntu-checks.sh )

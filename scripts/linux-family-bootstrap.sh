@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # First-time Linux litmus: install common packages, clone cursor-01 runtime-spine
-# sibling repos next to this uDOS-ubuntu checkout, install minimal Python tooling,
+# sibling repos next to this uDOS-host checkout, install minimal Python tooling,
 # run the full round proof.
 #
 # Self-upgrade / self-heal (default on):
-#   - Fast-forwards this uDOS-ubuntu repo from origin, then re-invokes this script
+#   - Fast-forwards this uDOS-host repo from origin, then re-invokes this script
 #     once so the latest installer logic runs (disable: UDOS_SKIP_SELF_UPGRADE=1).
 #   - Pulls siblings when already cloned (disable: UDOS_SKIP_SIBLING_UPGRADE=1).
 #   - Removes broken sibling dirs (no .git or corrupt git) and re-clones.
@@ -12,10 +12,10 @@
 #   - Optional: UDOS_APT_UPGRADE=1 runs apt-get upgrade -y after install.
 #   - If ff-only pull fails: set UDOS_BOOTSTRAP_RESET_HARD=1 to reset --hard to origin/BRANCH.
 #
-# Prerequisites: git, network. Run from a clone of uDOS-ubuntu (any branch).
+# Prerequisites: git, network. Run from a clone of uDOS-host (any branch).
 #
 # Environment (optional):
-#   UDOS_FAMILY_ROOT      parent directory for sibling clones (default: parent of uDOS-ubuntu)
+#   UDOS_FAMILY_ROOT      parent directory for sibling clones (default: parent of uDOS-host)
 #   UDOS_FAMILY_GIT_BASE  e.g. https://github.com/your-org  (default: derived from this repo's origin)
 #   UDOS_FAMILY_BRANCH    branch for shallow clones / pulls (default: main)
 #   UDOS_SKIP_APT=1       do not attempt apt-get install
@@ -30,7 +30,7 @@
 #     for LAN-visible command-centre (see docs/lan-command-centre-persistent.md)
 #
 # Usage:
-#   git clone --depth 1 https://github.com/<ORG>/uDOS-ubuntu.git && cd uDOS-ubuntu
+#   git clone --depth 1 https://github.com/<ORG>/uDOS-host.git && cd uDOS-host
 #   bash scripts/linux-family-bootstrap.sh
 
 set -eu
@@ -68,9 +68,9 @@ derive_git_base() {
     return 1
   fi
   if printf '%s' "$raw" | grep -q '^git@'; then
-    base=$(printf '%s' "$raw" | sed -E 's|^git@([^:]+):(.+)/uDOS-ubuntu(\.git)?$|https://\1/\2|')
+    base=$(printf '%s' "$raw" | sed -E 's|^git@([^:]+):(.+)/uDOS-host(\.git)?$|https://\1/\2|')
   else
-    base=$(printf '%s' "$raw" | sed -E 's|/uDOS-ubuntu(\.git)?$||')
+    base=$(printf '%s' "$raw" | sed -E 's|/uDOS-host(\.git)?$||')
   fi
   if [ -z "$base" ] || [ "$base" = "$raw" ]; then
     return 1
@@ -137,15 +137,15 @@ self_upgrade_ubuntu_repo() {
     return 0
   fi
   if [ ! -d "$UBUNTU_ROOT/.git" ]; then
-    warn "uDOS-ubuntu has no .git; skipping self-upgrade (copy or archive install)."
+    warn "uDOS-host has no .git; skipping self-upgrade (copy or archive install)."
     return 0
   fi
   local before after
   before=$(git -C "$UBUNTU_ROOT" rev-parse HEAD 2>/dev/null) || return 0
-  info "Self-upgrade: fetching origin for uDOS-ubuntu (branch $BRANCH)..."
+  info "Self-upgrade: fetching origin for uDOS-host (branch $BRANCH)..."
   if ! git -C "$UBUNTU_ROOT" fetch origin "$BRANCH" 2>/dev/null; then
     git -C "$UBUNTU_ROOT" fetch origin || {
-      warn "git fetch failed for uDOS-ubuntu; continuing with current tree."
+      warn "git fetch failed for uDOS-host; continuing with current tree."
       return 0
     }
   fi
@@ -159,15 +159,15 @@ self_upgrade_ubuntu_repo() {
   if git -C "$UBUNTU_ROOT" merge --ff-only -q "origin/$BRANCH" 2>/dev/null; then
     :
   elif [ "${UDOS_BOOTSTRAP_RESET_HARD:-0}" = "1" ]; then
-    warn "UDOS_BOOTSTRAP_RESET_HARD=1: resetting uDOS-ubuntu to origin/$BRANCH"
+    warn "UDOS_BOOTSTRAP_RESET_HARD=1: resetting uDOS-host to origin/$BRANCH"
     git -C "$UBUNTU_ROOT" reset --hard -q "origin/$BRANCH"
   else
-    warn "Fast-forward blocked for uDOS-ubuntu (local commits or diverged). Set UDOS_BOOTSTRAP_RESET_HARD=1 to match origin/$BRANCH, or fix manually."
+    warn "Fast-forward blocked for uDOS-host (local commits or diverged). Set UDOS_BOOTSTRAP_RESET_HARD=1 to match origin/$BRANCH, or fix manually."
     return 0
   fi
   after=$(git -C "$UBUNTU_ROOT" rev-parse HEAD)
   if [ "$before" != "$after" ] && [ "${UDOS_BOOTSTRAP_NO_REEXEC:-0}" != "1" ]; then
-    info "uDOS-ubuntu updated; re-invoking installer with latest script..."
+    info "uDOS-host updated; re-invoking installer with latest script..."
     export UDOS_BOOTSTRAP_NO_REEXEC=1
     exec bash "$BOOTSTRAP_SCRIPT"
   fi
@@ -253,7 +253,7 @@ if [ -z "$GIT_BASE" ]; then
   exit 1
 fi
 
-info "uDOS-ubuntu root:  $UBUNTU_ROOT"
+info "uDOS-host root:  $UBUNTU_ROOT"
 info "Family root:       $FAMILY_ROOT"
 info "Family git base:   $GIT_BASE"
 info "Clone branch:      $BRANCH"
@@ -296,4 +296,4 @@ info "LAN persistence: docs/lan-command-centre-persistent.md"
 . "$UBUNTU_ROOT/scripts/lib/udos-web-listen.sh"
 udos_web_resolve_listen
 info "Loopback URL: $(udos_web_base_url)"
-info "Re-run this script anytime to pull latest uDOS-ubuntu + siblings and refresh tools."
+info "Re-run this script anytime to pull latest uDOS-host + siblings and refresh tools."

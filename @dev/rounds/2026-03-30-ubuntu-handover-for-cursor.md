@@ -1,7 +1,7 @@
 # Ubuntu Handover For Cursor
 
 Date: 2026-03-30
-Repo: `uDOS-ubuntu`
+Repo: `uDOS-host`
 
 ## Current State
 

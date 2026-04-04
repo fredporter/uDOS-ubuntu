@@ -1,7 +1,7 @@
 {
   "version": "v1",
   "surface_id": "wizard-browser-host-bridge",
-  "owner": "uDOS-ubuntu",
+  "owner": "uDOS-host",
   "consumer": "uDOS-wizard",
   "purpose": "Expose Ubuntu-owned host operations to Wizard browser surfaces without making Wizard the canonical config or runtime owner.",
   "base_path": "/host",

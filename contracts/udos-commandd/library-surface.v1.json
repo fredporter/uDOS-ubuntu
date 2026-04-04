@@ -1,8 +1,8 @@
 {
   "version": "v1",
   "surface_id": "ubuntu-library-surface",
-  "owner": "uDOS-ubuntu",
-  "service_id": "uDOS-ubuntu",
+  "owner": "uDOS-host",
+  "service_id": "uDOS-host",
   "surface": "library",
   "transport": "local-http",
   "offline_safe": true,

@@ -2,4 +2,4 @@
 
 set -eu
 
-echo "uDOS-ubuntu preinstall hook placeholder"
+echo "uDOS-host preinstall hook placeholder"

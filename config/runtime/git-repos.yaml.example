@@ -4,9 +4,9 @@ repo_store:
   default_clone_mode: working-checkout
   allow_attach_outside_root: true
 repos:
-  - repo_id: uDOS-ubuntu
-    path: "~/.udos/repos/uDOS-ubuntu"
-    remote: "git@github.com:udos-family/uDOS-ubuntu.git"
+  - repo_id: uDOS-host
+    path: "~/.udos/repos/uDOS-host"
+    remote: "git@github.com:udos-family/uDOS-host.git"
     default_branch: main
     sync_policy: manual-push-auto-fetch
   - repo_id: uDOS-empire

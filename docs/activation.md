@@ -1,4 +1,4 @@
-# uDOS-ubuntu Activation
+# uDOS-host Activation
 
 ## Purpose
 
@@ -20,6 +20,7 @@ replace host uptime authority. Shared GUI vocabulary: [`uDOS-dev/docs/gui-system
 - sonic pre/post install hooks under sonic-hooks/
 - command-centre scaffolding, service-boot planning, and config layout docs
 - legacy-named scaffold manifest under examples/
+- optional **GPT export helper** (Node) under `services/gpt-export-helper/` — deterministic ZIP export for GPT Actions; specs in **`uDOS-gpthelper`**; see `services/gpt-export-helper/README.md`
 - repo validation entrypoint under scripts/run-ubuntu-checks.sh
 
 ## Current Validation Contract

@@ -11,7 +11,7 @@ After a successful **physical Linux install** (`docs/linux-first-run-quickstart.
 
 ## Quick run (foreground)
 
-From `uDOS-ubuntu`:
+From `uDOS-host`:
 
 ```bash
 bash scripts/serve-command-centre-demo-lan.sh

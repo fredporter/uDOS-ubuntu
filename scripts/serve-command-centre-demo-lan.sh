@@ -14,7 +14,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # shellcheck source=scripts/lib/udos-web-listen.sh
 . "$SCRIPT_DIR/lib/udos-web-listen.sh"
 udos_web_resolve_listen
-echo "[uDOS-ubuntu] Command-centre demo — LAN bind (0.0.0.0, port $UDOS_WEB_PORT)"
+echo "[uDOS-host] Command-centre demo — LAN bind (0.0.0.0, port $UDOS_WEB_PORT)"
 echo "  this host:  http://127.0.0.1:${UDOS_WEB_PORT}/"
 echo "  other LAN:  http://<this-host-ip>:${UDOS_WEB_PORT}/  (Linux: hostname -I | awk '{print \$1}')"
 echo "  stop:       Ctrl+C"

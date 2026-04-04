@@ -128,7 +128,7 @@ Suggested broker handoff shape:
   "broker": "wizard",
   "intent": "format_doc",
   "capability": "ok.transformation",
-  "destination_service": "uDOS-ubuntu",
+  "destination_service": "uDOS-host",
   "destination_surface": "okd",
   "dispatch_mode": "direct",
   "constraints": {

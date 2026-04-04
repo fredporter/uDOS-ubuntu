@@ -1,6 +1,6 @@
 {
   "profile": "always-on-local-mirror-cache-host",
-  "owner": "uDOS-ubuntu",
+  "owner": "uDOS-host",
   "remote_lane": "google-mvp-a",
   "local_defaults": {
     "cache_enabled": true,

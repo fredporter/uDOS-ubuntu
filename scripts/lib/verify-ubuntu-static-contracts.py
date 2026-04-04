@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static contract checks for uDOS-ubuntu (extracted from run-ubuntu-checks.sh, OB-R4).
+"""Static contract checks for uDOS-host (extracted from run-ubuntu-checks.sh, OB-R4).
 
 Required-file existence is enforced via ``ubuntu-check-required-files.v1.list``
 (shared with ``run-ubuntu-checks.sh``). Run from repository root (same cwd as
@@ -85,11 +85,11 @@ def main() -> None:
     minimum_ops = [item["operation_id"] for item in minimum_operations.get("minimum_operations", [])]
     if not minimum_ops:
         raise SystemExit("contracts/udos-commandd/minimum-operations.v1.json must define at least one minimum operation")
-    if wizard_host_surface.get("owner") != "uDOS-ubuntu":
+    if wizard_host_surface.get("owner") != "uDOS-host":
         raise SystemExit("contracts/udos-commandd/wizard-host-surface.v1.json owner mismatch")
     if wizard_host_surface.get("base_path") != "/host":
         raise SystemExit("contracts/udos-commandd/wizard-host-surface.v1.json base_path mismatch")
-    if git_host_surface.get("owner") != "uDOS-ubuntu":
+    if git_host_surface.get("owner") != "uDOS-host":
         raise SystemExit("contracts/udos-commandd/git-host-surface.v1.json owner mismatch")
     if git_host_surface.get("base_path") != "/repos":
         raise SystemExit("contracts/udos-commandd/git-host-surface.v1.json base_path mismatch")
@@ -104,8 +104,8 @@ def main() -> None:
         raise SystemExit("config/runtime/runtime.yaml.example must declare ~/.udos/repos")
     if 'repo_registry: "~/.udos/state/gitd/repo-registry.tsv"' not in runtime_yaml:
         raise SystemExit("config/runtime/runtime.yaml.example must declare gitd repo registry path")
-    if "repo_store:" not in git_repos_yaml or "repo_id: uDOS-ubuntu" not in git_repos_yaml:
-        raise SystemExit("config/runtime/git-repos.yaml.example must define repo_store and at least uDOS-ubuntu")
+    if "repo_store:" not in git_repos_yaml or "repo_id: uDOS-host" not in git_repos_yaml:
+        raise SystemExit("config/runtime/git-repos.yaml.example must define repo_store and at least uDOS-host")
     if github_policy.get("policy_id") != "ubuntu-github-action-policy":
         raise SystemExit("config/policy/github-action-policy.json.example policy_id mismatch")
     if github_policy.get("repo_rules", {}).get("repo.push", {}).get("mode") != "require-approval":

@@ -2,4 +2,4 @@
 
 set -eu
 
-echo "uDOS-ubuntu live environment hook placeholder"
+echo "uDOS-host live environment hook placeholder"

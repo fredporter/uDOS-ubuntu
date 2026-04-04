@@ -1,4 +1,4 @@
-# uDOS-ubuntu
+# uDOS-host
 
 **Product names:** this repo implements **uDOS-host** (local runtime host,
 `~/.udos/` materialisation, command-centre posture). When we mean an always-on /
@@ -8,7 +8,7 @@ See **`uDOS-dev/docs/udos-host-platform-posture.md`** for OS support (Linux tier
 
 ## Naming — do not conflate this repo with “GNOME design”
 
-- **This git repo** (folder name **`uDOS-ubuntu`** until renamed to **`uDOS-host`**) is the **runtime host implementation**: images, scripts, hooks, command-centre posture, disk layout — not a design-system home.
+- **This git repo** (folder name **`uDOS-host`**) is the **runtime host implementation**: images, scripts, hooks, command-centre posture, disk layout — not a design-system home.
 - **Ubuntu** here means the **distro baseline** we build on, not “this repository equals Ubuntu Desktop as a product.”
 - **Classic Modern** and **de-modernised GNOME** posture are **specified** in **`uDOS-docs/docs/classic-modern-mvp-0.1/`** (host profile, tokens, brief). **`uDOS-themes`** and **`uDOS-thinui`** own tokens and primary surface; **this repo** applies host-side steps (tweaks, launch paths, scripts) that **follow** that pack. If you are doing **visual / token** work, start in the Classic Modern pack + themes + ThinUI — not only here.
 
@@ -56,7 +56,7 @@ Keep image generation deterministic, scriptable, and portable for Sonic-driven d
 
 ## Family Relation
 
-This repository (**uDOS-host** implementation; legacy name **uDOS-ubuntu**) is the target always-on runtime host for the family.
+This repository (**uDOS-host** implementation; legacy name **uDOS-host**) is the target always-on runtime host for the family.
 
 It should host the official base command centre:
 
@@ -88,7 +88,7 @@ Run the local validation entrypoint with:
 
 scripts/run-ubuntu-checks.sh
 
-**Linux first install from the public repo (clone uDOS-ubuntu only, then one script):** see `docs/linux-first-run-quickstart.md` and `scripts/linux-family-bootstrap.sh`.
+**Linux first install from the public repo (clone uDOS-host only, then one script):** see `docs/linux-first-run-quickstart.md` and `scripts/linux-family-bootstrap.sh`.
 
 Run the current first-run demo story with:
 

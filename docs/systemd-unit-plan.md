@@ -1,4 +1,4 @@
-# uDOS-ubuntu Systemd Unit Plan
+# uDOS-host Systemd Unit Plan
 
 This document defines the target `systemd` unit layout for the Ubuntu command
 centre.
@@ -8,8 +8,8 @@ to:
 
 - `uDOS-dev/docs/runtime-spine.md` (family hub)
 - `uDOS-dev/docs/ubuntu-command-centre-reference.md` (compact command-centre ref)
-- `uDOS-ubuntu/docs/architecture.md` (host direction, failure rule, topology)
-- `uDOS-ubuntu/docs/config-layout.md` (`~/.udos/` layout contract)
+- `uDOS-host/docs/architecture.md` (host direction, failure rule, topology)
+- `uDOS-host/docs/config-layout.md` (`~/.udos/` layout contract)
 - this document (unit graph and process ordering)
 
 ## Goals

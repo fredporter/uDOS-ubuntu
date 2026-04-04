@@ -1,6 +1,6 @@
 # Active Request Index
 
-This is the compact active request index for `uDOS-ubuntu`.
+This is the compact active request index for `uDOS-host`.
 
 ## Current Active Requests
 
