@@ -43,6 +43,22 @@ bash scripts/run-ubuntu-strict-completion-gate.sh
 
 This gate composes repo checks, HTTP checks, and LAN continuity proof.
 
+## v2.6 family spine parity (host lane)
+
+**Binder:** `#binder/ubuntu-v2-6-host-parity-checks`
+
+Core **binder spine v1** (`uDOS-core`), the ThinUI workspace bridge (`uDOS-thinui`), and workspace operator snapshots (`uDOS-workspace`) live in **sibling repos**. `uDOS-host` does **not** ship those JSON payloads or claim canonical binder truth; it remains the Ubuntu runtime, `~/.udos/` materialisation, and command-centre/daemon surfaces documented here.
+
+**After pulling** `uDOS-host` or when validating a spine-related family update on a workstation, re-run the repo checks from this repository root:
+
+```bash
+bash scripts/run-ubuntu-checks.sh
+```
+
+For the stricter local gate (HTTP + LAN continuity composed), use `bash scripts/run-ubuntu-strict-completion-gate.sh` (see **Current Validation Contract** above).
+
+**Environment:** no new variables are required for spine v1. Python selection remains `PYTHON`, optional `UDOS_SHARED_PYTHON_BIN`, and `UDOS_USE_SHARED_RESOURCES` as described in `scripts/run-ubuntu-checks.sh`.
+
 ## GitHub Actions
 
 Workflows live under `.github/workflows/`:
